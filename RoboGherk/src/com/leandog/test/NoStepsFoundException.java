@@ -1,6 +1,6 @@
 package com.leandog.test;
 
-public class NoStepsFoundException extends Exception {
+public class NoStepsFoundException extends RoboGherkException {
     private static final long serialVersionUID = 1L;
     private final Feature feature;
     private String className;

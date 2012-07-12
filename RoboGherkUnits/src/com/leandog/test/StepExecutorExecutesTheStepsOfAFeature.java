@@ -31,7 +31,7 @@ public class StepExecutorExecutesTheStepsOfAFeature {
         stepExecutor.call(feature, "this does not exist");
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test(expected = RoboGherkException.class)
     public void itTellsMeWhenAnAssertionFails() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
         when(stepFinder.findStepsFor(feature)).thenReturn(stepStub);
@@ -41,7 +41,7 @@ public class StepExecutorExecutesTheStepsOfAFeature {
     }
     
     
-    @Test(expected=IllegalAccessError.class)
+    @Test(expected=RoboGherkException.class)
     public void itTellsMeTheCauseOfMyStepFailure() throws Throwable{
         stepStub = new DoingThingsAndStuffSteps();
         when(stepFinder.findStepsFor(feature)).thenReturn(stepStub);

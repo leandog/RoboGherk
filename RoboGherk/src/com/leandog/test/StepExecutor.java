@@ -11,7 +11,7 @@ public class StepExecutor {
         this.stepFinder = stepFinder;
     }
 
-    public void call(Feature feature, String action) throws Throwable {
+    public void call(Feature feature, String action) throws RoboGherkException {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
 
         Method method;
@@ -21,7 +21,9 @@ public class StepExecutor {
         } catch (NoSuchMethodException e) {
             throw new NoStepsFoundException(feature, e);
         } catch (InvocationTargetException e) {
-            throw e.getCause();
+            throw new RoboGherkException(e.getCause());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
