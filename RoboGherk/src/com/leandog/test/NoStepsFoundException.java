@@ -2,16 +2,16 @@ package com.leandog.test;
 
 public class NoStepsFoundException extends RoboGherkException {
     private static final long serialVersionUID = 1L;
-    private final Feature feature;
+    private final String feature;
     private String className;
     private NoSuchMethodException exception;
 
-    public NoStepsFoundException(Feature feature, String className) {
+    public NoStepsFoundException(String feature, String className) {
         this.feature = feature;
         this.className = className;
     }
 
-    public NoStepsFoundException(Feature feature, NoSuchMethodException exception) {
+    public NoStepsFoundException(String feature, NoSuchMethodException exception) {
         this.feature = feature;
         this.exception = exception;
 
@@ -24,8 +24,8 @@ public class NoStepsFoundException extends RoboGherkException {
 
     public String makeMessage() {
         if (className != null )
-            return String.format("\nSteps not found: %s\nPlease create class : %s", feature.getFeatureName(), className);
+            return String.format("\nSteps not found: %s\nPlease create class : %s", feature, className);
 
-        return String.format("\nNo step found within the feature %s\n Please implement %s\n\n", feature.getFeatureName(), exception.getMessage());
+        return String.format("\nNo step found within the feature %s\n Please implement %s\n\n", feature, exception.getMessage());
     }
 }

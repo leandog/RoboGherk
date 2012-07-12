@@ -10,13 +10,13 @@ public class StepFinder {
         this.packageName = packageName;
     }
 
-    public StepDefinitions findStepsFor(Feature feature) throws NoStepsFoundException {
+    public StepDefinitions findStepsFor(String feature) throws NoStepsFoundException {
         StepDefinitions steps = null;
         try {
-            Class<?> stepClass = Class.forName(getClassName(feature.getFeatureName()));
+            Class<?> stepClass = Class.forName(getClassName(feature));
             steps = (StepDefinitions) stepClass.newInstance();
         } catch (Exception e) {
-            throw new NoStepsFoundException(feature, getClassName(feature.getFeatureName()));
+            throw new NoStepsFoundException(feature, getClassName(feature));
         }
         return steps;
     }
@@ -41,5 +41,6 @@ public class StepFinder {
     private String camelCaseThe(String word) {
         return (word.charAt(0) + "").toUpperCase() + word.substring(1, word.length());
     }
+
 
 }

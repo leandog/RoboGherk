@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StepExecutorExecutesTheStepsOfAFeature {
-    Feature feature = new SampleFeature("doing things and stuff");
+    String feature = "doing things and stuff";
     StepFinder stepFinder = mock(StepFinder.class);
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);
     private StepExecutor stepExecutor;

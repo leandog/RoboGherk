@@ -11,7 +11,7 @@ public class StepExecutor {
         this.stepFinder = stepFinder;
     }
 
-    public void call(Feature feature, String action) throws RoboGherkException {
+    public void call(String feature, String action) throws RoboGherkException {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
 
         Method method;
@@ -29,6 +29,10 @@ public class StepExecutor {
 
     private String getMethodNameFrom(String action) {
         return action.replace(" ", "_");
+    }
+
+    public void call(String string) throws RoboGherkException{
+        
     }
     
 }
