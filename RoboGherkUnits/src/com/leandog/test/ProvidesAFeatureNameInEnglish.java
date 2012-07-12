@@ -11,8 +11,4 @@ public class ProvidesAFeatureNameInEnglish {
         Feature feature = new SampleFeature("name of the feature");
         assertEquals("name of the feature",feature.getFeatureName());
     }
-    
-    public void theNameMatchesTheClassName() {
-        
-    }
 }

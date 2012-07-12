@@ -10,14 +10,13 @@ public class StepFinder {
         this.packageName = packageName;
     }
 
-    public Steps findStepsFor(Feature feature) throws NoStepsFoundException {
-        String featureName = feature.getFeatureName();
-        Steps steps = null;
+    public StepDefinitions findStepsFor(Feature feature) throws NoStepsFoundException {
+        StepDefinitions steps = null;
         try {
-            Class<?> stepClass = Class.forName(getClassName(featureName));
-            steps = (Steps) stepClass.newInstance();
+            Class<?> stepClass = Class.forName(getClassName(feature.getFeatureName()));
+            steps = (StepDefinitions) stepClass.newInstance();
         } catch (Exception e) {
-            throw new NoStepsFoundException(featureName, getClassName(featureName));
+            throw new NoStepsFoundException(feature, getClassName(feature.getFeatureName()));
         }
         return steps;
     }

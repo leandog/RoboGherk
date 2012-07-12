@@ -9,14 +9,15 @@ public class FindsStepsForFeatures {
     
     @Test
     public void findsStepsForFeature() throws Exception {
-        Steps steps = new StepFinder("com.leandog.test").findStepsFor(new SampleFeature("local fake"));
+        Feature feature = new SampleFeature("local fake");
+        StepDefinitions steps = new StepFinder("com.leandog.test").findStepsFor(feature);
         String actualClassName = steps.getClass().getName();
         assertEquals("com.leandog.test.LocalFakeSteps", actualClassName);
     }
 
     @Test
     public void findsStepsForAFeatureInADifferentPackage() throws Exception {
-        Steps steps = new StepFinder("com.leandog.test.fake").findStepsFor(new SampleFeature("fake"));
+        StepDefinitions steps = new StepFinder("com.leandog.test.fake").findStepsFor(new SampleFeature("fake"));
         assertEquals("com.leandog.test.fake.FakeSteps", steps.getClass().getName());
     }
 
@@ -27,5 +28,5 @@ public class FindsStepsForFeatures {
      
 }
 
-class LocalFakeSteps implements Steps {
+class LocalFakeSteps implements StepDefinitions {
 }
