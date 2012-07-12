@@ -14,11 +14,9 @@ public class StepExecutor {
     public void call(Feature feature, String action) throws Throwable {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
 
-        action = action.replace(" ", "_");
-
         Method method;
         try {
-            method = stepDefinitions.getClass().getMethod(action);
+            method = stepDefinitions.getClass().getMethod(getMethodNameFrom(action));
             method.invoke(stepDefinitions);
         } catch (NoSuchMethodException e) {
             throw new NoStepsFoundException(feature, e);
@@ -26,4 +24,9 @@ public class StepExecutor {
             throw e.getCause();
         }
     }
+
+    private String getMethodNameFrom(String action) {
+        return action.replace(" ", "_");
+    }
+    
 }
