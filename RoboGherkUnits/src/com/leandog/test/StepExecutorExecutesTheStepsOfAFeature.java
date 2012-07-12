@@ -1,8 +1,9 @@
 package com.leandog.test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import junit.framework.Assert;
-import junit.framework.AssertionFailedError;
 
 import org.junit.Before;
 import org.junit.Test;
