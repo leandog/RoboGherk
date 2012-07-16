@@ -57,7 +57,6 @@ public class StepExecutor {
     }
 
     private String getMethodNameFrom(String action) {
-
         if (hasArguments(action)) {
             action = action.replace("'" + getArgumentFrom(action) + "'", "arg");
         }

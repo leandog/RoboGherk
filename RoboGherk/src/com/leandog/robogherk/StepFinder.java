@@ -1,7 +1,5 @@
 package com.leandog.robogherk;
 
-
-
 public class StepFinder {
 
     private String packageName;
@@ -41,6 +39,4 @@ public class StepFinder {
     private String camelCaseThe(String word) {
         return (word.charAt(0) + "").toUpperCase() + word.substring(1, word.length());
     }
-
-
 }

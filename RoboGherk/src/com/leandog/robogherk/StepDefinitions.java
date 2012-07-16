@@ -11,7 +11,5 @@ public abstract class StepDefinitions {
     public void setTestDependecies(Instrumentation instrumentation, Solo soloDriver) {
         this.instrumentation = instrumentation;
         this.soloDriver = soloDriver;
-        
     }
-
 }

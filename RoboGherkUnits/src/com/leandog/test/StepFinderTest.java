@@ -8,7 +8,7 @@ import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.StepDefinitions;
 import com.leandog.robogherk.StepFinder;
 
-public class FindsStepsForFeatures {
+public class StepFinderTest {
     
     @Test
     public void findsStepsForFeature() throws Exception {

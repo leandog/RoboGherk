@@ -16,7 +16,7 @@ import com.leandog.robogherk.StepExecutor;
 import com.leandog.robogherk.StepFinder;
 import com.leandog.test.fake.DoingThingsAndStuffSteps;
 
-public class StepExecutorExecutesTheStepsOfAFeature {
+public class StepExecutorTest {
     String feature = "doing things and stuff";
     StepFinder stepFinder = mock(StepFinder.class);
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);

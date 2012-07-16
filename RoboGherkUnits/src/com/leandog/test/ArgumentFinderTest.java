@@ -30,5 +30,4 @@ public class ArgumentFinderTest {
     public void itFindsASingleArgumentWithAnApostrophe() {
         assertEquals("bar's tender", finder.findArgument("hello 'bar's tender' friend"));
     }
-   
 }
