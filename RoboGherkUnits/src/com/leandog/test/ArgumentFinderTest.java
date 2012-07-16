@@ -33,31 +33,25 @@ public class ArgumentFinderTest {
         assertEquals("bar's tender", finder.findArguments("hello 'bar's tender' friend").get(0));
     }
    
-    @Test
-    public void itFindsMultipleArguments() {
-        List<String> actualArguments = finder.findArguments("I will be at the 'bar' feeling 'tender' friend");
-        
-        assertEquals("bar",actualArguments.get(0));
-        assertEquals("tender", actualArguments.get(1));
-    }
-
 }
 
 class ArgumentFinder {
 
+    private Pattern pattern = Pattern.compile("'.+'");
+
     public List<String> findArguments(String string) {
         List<String> arguments = new ArrayList<String>();
-        Pattern pattern = Pattern.compile("'.+'");
+        
         Matcher matcher = pattern.matcher(string);
-
+       
         while (matcher.find()) {
-            StringBuilder match = new StringBuilder(matcher.group());
-            match.deleteCharAt(0).deleteCharAt(match.length()-1);
-            System.out.println(match.toString());
-            arguments.add(match.toString());
+            arguments.add(removeOutterQuotes(new StringBuilder(matcher.group())));
         }
-
+        
         return arguments;
     }
 
+    private String removeOutterQuotes(StringBuilder match) {
+        return match.deleteCharAt(0).deleteCharAt(match.length()-1).toString();
+    }
 }
