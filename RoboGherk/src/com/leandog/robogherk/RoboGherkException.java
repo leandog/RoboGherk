@@ -1,4 +1,4 @@
-package com.leandog.test;
+package com.leandog.robogherk;
 
 public class RoboGherkException extends Exception {
     private static final long serialVersionUID = 743458777778964419L;

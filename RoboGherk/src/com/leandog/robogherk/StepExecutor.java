@@ -1,4 +1,4 @@
-package com.leandog.test;
+package com.leandog.robogherk;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,19 +16,12 @@ public class StepExecutor {
     public StepExecutor(StepFinder stepFinder) {
         this.stepFinder = stepFinder;
     }
-    
 
     public void call(String feature, String action) throws RoboGherkException {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
         stepDefinitions.setTestDependecies(instrumentation, solo);
-        Method method;
         try {
-            
-            String methodName = getMethodNameFrom(action);
-            
-            
-            method = stepDefinitions.getClass().getMethod(methodName);
-            method.invoke(stepDefinitions);
+            invoke(action, stepDefinitions);
         } catch (NoSuchMethodException e) {
             throw new NoStepsFoundException(feature, e);
         } catch (InvocationTargetException e) {
@@ -38,17 +31,37 @@ public class StepExecutor {
         }
     }
 
-    private String getMethodNameFrom(String action) {
-        
-        action.replaceAll("", "arg");
-        
-        
-        return action.replace(" ", "_");
+    private void invoke(String action, StepDefinitions stepDefinitions) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        String methodName = getMethodNameFrom(action);
+
+        if (hasArguments(action)) {
+            Method method = stepDefinitions.getClass().getMethod(methodName, String.class);
+            method.invoke(stepDefinitions, getArgumentFrom(action));
+        } else {
+            Method method = stepDefinitions.getClass().getMethod(methodName);
+            method.invoke(stepDefinitions);
+        }
     }
 
+    private boolean hasArguments(String action) {
+        return !"".equals(getArgumentFrom(action));
+    }
 
     public void setup(Instrumentation instrumentation, Solo solo) {
         this.instrumentation = instrumentation;
         this.solo = solo;
+    }
+
+    private String getArgumentFrom(String action) {
+        return new ArgumentFinder("'").findArgument(action);
+    }
+
+    private String getMethodNameFrom(String action) {
+
+        if (hasArguments(action)) {
+            action = action.replace("'" + getArgumentFrom(action) + "'", "arg");
+        }
+
+        return action.replace(" ", "_");
     }
 }

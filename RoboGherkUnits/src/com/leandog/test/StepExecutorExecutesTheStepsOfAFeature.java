@@ -1,28 +1,27 @@
 package com.leandog.test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import android.app.Instrumentation;
 
 import com.jayway.android.robotium.solo.Solo;
+import com.leandog.robogherk.NoStepsFoundException;
+import com.leandog.robogherk.RoboGherkException;
+import com.leandog.robogherk.StepDefinitions;
+import com.leandog.robogherk.StepExecutor;
+import com.leandog.robogherk.StepFinder;
 
 public class StepExecutorExecutesTheStepsOfAFeature {
     String feature = "doing things and stuff";
     StepFinder stepFinder = mock(StepFinder.class);
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);
-    private StepExecutor stepExecutor;
+    StepExecutor stepExecutor;
 
     @Before
     public void setUp() throws Exception {
@@ -47,7 +46,6 @@ public class StepExecutorExecutesTheStepsOfAFeature {
         verify(stepStub).I_do_the_first_thing();
     }
 
-    @Ignore
     @Test
     public void itExecutesTheStepForAFeatureWithArguments() throws RoboGherkException {
         stepExecutor.call(feature, "I say 'hello - Dave' to Dave");
@@ -80,7 +78,7 @@ public class StepExecutorExecutesTheStepsOfAFeature {
 
 }
 
-class DoingThingsAndStuffSteps implements StepDefinitions {
+class DoingThingsAndStuffSteps extends StepDefinitions {
     public void I_do_the_first_thing() {
     }
 
@@ -95,9 +93,4 @@ class DoingThingsAndStuffSteps implements StepDefinitions {
     public void I_say_arg_to_Dave(String arg) {
 
     }
-
-    @Override
-    public void setTestDependecies(Instrumentation instrumentation, Solo soloDriver) {
-    }
-
 }

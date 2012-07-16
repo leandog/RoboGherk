@@ -7,6 +7,9 @@ import org.junit.Test;
 import android.app.Instrumentation;
 
 import com.jayway.android.robotium.solo.Solo;
+import com.leandog.robogherk.NoStepsFoundException;
+import com.leandog.robogherk.StepDefinitions;
+import com.leandog.robogherk.StepFinder;
 
 public class FindsStepsForFeatures {
 
@@ -31,11 +34,8 @@ public class FindsStepsForFeatures {
      
 }
 
-class LocalFakeSteps implements StepDefinitions {
-
+class LocalFakeSteps extends StepDefinitions {
     @Override
     public void setTestDependecies(Instrumentation instrumentation, Solo soloDriver) {
-        // TODO Auto-generated method stub
-        
     }
 }
