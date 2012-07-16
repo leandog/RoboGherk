@@ -21,7 +21,7 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
     protected void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation());
-        stepExecutor = new StepExecutor(new StepFinder(packageName));
+        stepExecutor = new StepExecutor(new StepFinder(packageName, new RealStepClassLoader()));
         stepExecutor.setup(getInstrumentation(), solo);
     }
 

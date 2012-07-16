@@ -3,10 +3,12 @@ package com.leandog.robogherk;
 
 public class StepFinder {
 
-    private String packageName;
+    private final String packageName;
+    private final StepClassLoader stepClassLoader;
 
-    public StepFinder(String packageName) {
+    public StepFinder(String packageName, StepClassLoader stepClassLoader) {
         this.packageName = packageName;
+        this.stepClassLoader = stepClassLoader;
     }
 
     public StepDefinitions findStepsFor(Class<? extends RoboGherkTester> testCaseClass) throws RoboGherkException {
@@ -17,7 +19,7 @@ public class StepFinder {
     private StepDefinitions loadStepsClass(String feature, String className) throws NoStepsFoundException {
         StepDefinitions steps = null;
         try {
-            Class<?> stepClass = Class.forName(className);
+            Class<?> stepClass = stepClassLoader.loadClass(className);
             steps = (StepDefinitions) stepClass.newInstance();
         } catch (Exception e) {
             throw new NoStepsFoundException(feature, e);
