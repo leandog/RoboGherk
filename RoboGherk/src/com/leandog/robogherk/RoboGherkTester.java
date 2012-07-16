@@ -10,7 +10,6 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
     private Solo solo;
     private StepExecutor stepExecutor;
     private String currentFeature;
-    private String currentScenario;
     private final String packageName;
 
     public abstract void defineFeature();
@@ -32,11 +31,6 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
     public void Feature(String feature) {
         this.currentFeature = feature;
         stepExecutor.setup(getInstrumentation(), solo);
-    }
-
-    public void Scenario(String scenario) {
-        this.currentScenario = scenario;
-        getActivity();
     }
 
     public void Given(String given) throws RoboGherkException {
@@ -65,13 +59,9 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
     }
 
     private void validate() {
+        getActivity();
         if (currentFeature == null) {
-            getActivity();
             fail("\nNo Feature has been defined!\nPlease define a feature by adding:\n void defineFeature() {\n\tFeature(\"My feature\");\n}\n ");
-        }
-        if (currentScenario == null) {
-            getActivity();
-            fail("\nNo scenario has been defined!\nPlease define a scenario at the beginning of every test!");
         }
     }
 }

@@ -14,9 +14,8 @@ public class HelloRoboGherkTest extends RoboGherkTester {
         Feature("my feature");
     }
     
-    public void testWorks() throws Exception {
-        Scenario("a working test");
-        Given("this should work");
+    public void test_A_working_scenario() throws Exception {
+        Given("I am on the HelloRoboGherk activity");
         Then("my 'parameter' should work too");
     }
 
