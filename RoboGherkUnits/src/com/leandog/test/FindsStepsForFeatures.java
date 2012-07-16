@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import android.app.Instrumentation;
+
+import com.jayway.android.robotium.solo.Solo;
+
 public class FindsStepsForFeatures {
 
     
@@ -28,4 +32,10 @@ public class FindsStepsForFeatures {
 }
 
 class LocalFakeSteps implements StepDefinitions {
+
+    @Override
+    public void setTestDependecies(Instrumentation instrumentation, Solo soloDriver) {
+        // TODO Auto-generated method stub
+        
+    }
 }

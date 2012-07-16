@@ -3,22 +3,19 @@ package com.leandog.test;
 
 public class FeatureTester {
 
-    
-   
-    private final StepFinder stepFinder;
     private final StepExecutor stepExecutor;
+    private String currentFeature;
 
-    public FeatureTester(StepFinder stepFinder, StepExecutor stepExecutor) {
-        this.stepFinder = stepFinder;
+    public FeatureTester(StepExecutor stepExecutor) {
         this.stepExecutor = stepExecutor;
     }
 
-    public void Feature(String feature) throws NoStepsFoundException {
-       stepFinder.findStepsFor(feature); 
+    public void callAction(String action) throws RoboGherkException {
+        stepExecutor.call(currentFeature, action);
     }
 
-    public void Given(String string) {
-        // TODO Auto-generated method stub
+    public void feature(String feature) {
+        this.currentFeature = feature;
         
     }
 

@@ -6,15 +6,15 @@ import org.junit.Test;
 
 public class FeatureTesterTest {
     StepExecutor stepExecutor = mock(StepExecutor.class);
-    StepFinder stepFinder = mock(StepFinder.class);
-    FeatureTester featureTester = new FeatureTester(stepFinder,stepExecutor);
+    FeatureTester featureTester = new FeatureTester(stepExecutor);
   
     
     @Test
-    public void itFindsStepDefinitionsWhenTheFeatureIsDefined() throws Exception {
-       
-        featureTester.Feature("magic happened");
+    public void itCallsGivenStepsForTheFeature() throws Exception {
+        featureTester.feature("magic");
+        featureTester.callAction("magic happened"); 
         
-        verify(stepFinder).findStepsFor("magic happened");
+        verify(stepExecutor).call("magic","magic happened");
     }
+    
 }

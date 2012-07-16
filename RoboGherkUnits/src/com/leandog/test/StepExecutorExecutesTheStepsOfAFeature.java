@@ -1,12 +1,22 @@
 package com.leandog.test;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import android.app.Instrumentation;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class StepExecutorExecutesTheStepsOfAFeature {
     String feature = "doing things and stuff";
@@ -21,10 +31,28 @@ public class StepExecutorExecutesTheStepsOfAFeature {
     }
 
     @Test
+    public void itProvidesTestDependenciesToTheSteps() throws RoboGherkException {
+        Instrumentation instrumentation = mock(Instrumentation.class);
+        Solo solo = mock(Solo.class);
+        stepExecutor.setup(instrumentation, solo);
+        stepExecutor.call(feature, "I do the first thing");
+
+        verify(stepStub).setTestDependecies(instrumentation, solo);
+    }
+
+    @Test
     public void itExecutesTheStepForAFeature() throws Throwable {
         stepExecutor.call(feature, "I do the first thing");
 
         verify(stepStub).I_do_the_first_thing();
+    }
+
+    @Ignore
+    @Test
+    public void itExecutesTheStepForAFeatureWithArguments() throws RoboGherkException {
+        stepExecutor.call(feature, "I say 'hello - Dave' to Dave");
+
+        verify(stepStub).I_say_arg_to_Dave("hello - Dave");
     }
 
     @Test(expected = NoStepsFoundException.class)
@@ -40,16 +68,16 @@ public class StepExecutorExecutesTheStepsOfAFeature {
         stepExecutor = new StepExecutor(stepFinder);
         stepExecutor.call(feature, "I should fail an assertion");
     }
-    
-    
-    @Test(expected=RoboGherkException.class)
-    public void itTellsMeTheCauseOfMyStepFailure() throws Throwable{
+
+    @Test(expected = RoboGherkException.class)
+    public void itTellsMeTheCauseOfMyStepFailure() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
         when(stepFinder.findStepsFor(feature)).thenReturn(stepStub);
 
         stepExecutor = new StepExecutor(stepFinder);
         stepExecutor.call(feature, "this should blow something else up");
     }
+
 }
 
 class DoingThingsAndStuffSteps implements StepDefinitions {
@@ -59,9 +87,17 @@ class DoingThingsAndStuffSteps implements StepDefinitions {
     public void I_should_fail_an_assertion() {
         Assert.fail("this blows up");
     }
-    
+
     public void this_should_blow_something_else_up() {
         throw new IllegalAccessError("NO ACCESS FOO!");
     }
-    
+
+    public void I_say_arg_to_Dave(String arg) {
+
+    }
+
+    @Override
+    public void setTestDependecies(Instrumentation instrumentation, Solo soloDriver) {
+    }
+
 }
