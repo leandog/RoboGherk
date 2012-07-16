@@ -17,13 +17,13 @@ public class StepExecutor {
         this.stepFinder = stepFinder;
     }
 
-    public void call(String feature, String action) throws RoboGherkException {
+    public void call(Class<? extends RoboGherkTester> feature, String action) throws RoboGherkException {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
         stepDefinitions.setTestDependecies(instrumentation, solo);
         try {
             invoke(action, stepDefinitions);
         } catch (NoSuchMethodException e) {
-            throw new NoStepsFoundException(feature, e);
+            throw new NoStepsFoundException(feature.getName(), e);
         } catch (InvocationTargetException e) {
             throw new RoboGherkException(e.getCause());
         } catch (Exception e) {

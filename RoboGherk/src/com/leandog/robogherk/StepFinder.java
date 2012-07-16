@@ -1,5 +1,6 @@
 package com.leandog.robogherk;
 
+
 public class StepFinder {
 
     private String packageName;
@@ -9,12 +10,16 @@ public class StepFinder {
     }
 
     public StepDefinitions findStepsFor(String feature) throws NoStepsFoundException {
+        return loadStepsClass(feature, getClassName(feature));
+    }
+
+    private StepDefinitions loadStepsClass(String feature, String className) throws NoStepsFoundException {
         StepDefinitions steps = null;
         try {
-            Class<?> stepClass = Class.forName(getClassName(feature));
+            Class<?> stepClass = Class.forName(className);
             steps = (StepDefinitions) stepClass.newInstance();
         } catch (Exception e) {
-            throw new NoStepsFoundException(feature, getClassName(feature));
+            throw new NoStepsFoundException(feature, e);
         }
         return steps;
     }
@@ -38,5 +43,10 @@ public class StepFinder {
 
     private String camelCaseThe(String word) {
         return (word.charAt(0) + "").toUpperCase() + word.substring(1, word.length());
+    }
+
+    public StepDefinitions findStepsFor(Class<? extends RoboGherkTester> testCaseClass) throws RoboGherkException {
+        String stepDefinitionClassName = testCaseClass.getSimpleName().replace("Test","Steps");
+        return loadStepsClass(testCaseClass.getSimpleName(), packageName + "." + stepDefinitionClassName);
     }
 }

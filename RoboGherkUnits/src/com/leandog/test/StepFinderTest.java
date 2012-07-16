@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.StepDefinitions;
 import com.leandog.robogherk.StepFinder;
+import com.leandog.robogherk.examples.MyFeatureTest;
 
 public class StepFinderTest {
     
@@ -26,6 +27,13 @@ public class StepFinderTest {
     @Test(expected = NoStepsFoundException.class)
     public void itLetsMeKnowWhenItCantFindSteps() throws Exception {
         new StepFinder("com.leandog.test").findStepsFor("this is fake");
+    }
+    
+    @Test
+    public void findsStepsForClass() throws Exception {
+        StepDefinitions steps = new StepFinder("com.leandog.test.fake").findStepsFor(MyFeatureTest.class);
+        String actualClassName = steps.getClass().getName();
+        assertEquals("com.leandog.test.fake.MyFeatureSteps", actualClassName);
     }
      
 }

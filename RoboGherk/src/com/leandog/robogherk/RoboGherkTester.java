@@ -9,10 +9,7 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
     private StepExecutor stepExecutor;
-    private String currentFeature;
     private final String packageName;
-
-    public abstract void defineFeature();
 
     @SuppressWarnings("unchecked")
     public RoboGherkTester(Class activityClass, String packageName) {
@@ -25,11 +22,6 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
         super.setUp();
         solo = new Solo(getInstrumentation());
         stepExecutor = new StepExecutor(new StepFinder(packageName));
-        defineFeature();
-    }
-
-    public void Feature(String feature) {
-        this.currentFeature = feature;
         stepExecutor.setup(getInstrumentation(), solo);
     }
 
@@ -54,14 +46,7 @@ public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
     }
 
     private void call(String action) throws RoboGherkException {
-        validate();
-        stepExecutor.call(currentFeature, action);
-    }
-
-    private void validate() {
         getActivity();
-        if (currentFeature == null) {
-            fail("\nNo Feature has been defined!\nPlease define a feature by adding:\n void defineFeature() {\n\tFeature(\"My feature\");\n}\n ");
-        }
+        stepExecutor.call(getClass(), action);
     }
 }

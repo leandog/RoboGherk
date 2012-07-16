@@ -4,17 +4,11 @@ public class NoStepsFoundException extends RoboGherkException {
     private static final long serialVersionUID = 1L;
     private final String feature;
     private String className;
-    private NoSuchMethodException exception;
+    private Exception exception;
 
-    public NoStepsFoundException(String feature, String className) {
-        this.feature = feature;
-        this.className = className;
-    }
-
-    public NoStepsFoundException(String feature, NoSuchMethodException exception) {
+    public NoStepsFoundException(String feature, Exception exception) {
         this.feature = feature;
         this.exception = exception;
-
     }
 
     @Override
