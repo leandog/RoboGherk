@@ -3,7 +3,6 @@ package com.leandog.test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +12,9 @@ import android.app.Instrumentation;
 import com.jayway.android.robotium.solo.Solo;
 import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.RoboGherkException;
-import com.leandog.robogherk.StepDefinitions;
 import com.leandog.robogherk.StepExecutor;
 import com.leandog.robogherk.StepFinder;
+import com.leandog.test.fake.DoingThingsAndStuffSteps;
 
 public class StepExecutorExecutesTheStepsOfAFeature {
     String feature = "doing things and stuff";
@@ -76,21 +75,4 @@ public class StepExecutorExecutesTheStepsOfAFeature {
         stepExecutor.call(feature, "this should blow something else up");
     }
 
-}
-
-class DoingThingsAndStuffSteps extends StepDefinitions {
-    public void I_do_the_first_thing() {
-    }
-
-    public void I_should_fail_an_assertion() {
-        Assert.fail("this blows up");
-    }
-
-    public void this_should_blow_something_else_up() {
-        throw new IllegalAccessError("NO ACCESS FOO!");
-    }
-
-    public void I_say_arg_to_Dave(String arg) {
-
-    }
 }
