@@ -12,14 +12,14 @@ import android.app.Instrumentation;
 import com.jayway.android.robotium.solo.Solo;
 import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.RoboGherkException;
-import com.leandog.robogherk.RoboGherkTester;
+import com.leandog.robogherk.Feature;
 import com.leandog.robogherk.StepExecutor;
 import com.leandog.robogherk.StepFinder;
-import com.leandog.robogherk.examples.MyFeatureTest;
+import com.leandog.robogherk.examples.MyFeature;
 import com.leandog.test.fake.DoingThingsAndStuffSteps;
 
 public class StepExecutorTest {
-    Class<? extends RoboGherkTester> testClass = MyFeatureTest.class;
+    Class<? extends Feature> testClass = MyFeature.class;
     StepFinder stepFinder = mock(StepFinder.class);
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);
     StepExecutor stepExecutor;

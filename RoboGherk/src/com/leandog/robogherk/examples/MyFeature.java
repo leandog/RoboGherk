@@ -1,11 +1,11 @@
 package com.leandog.robogherk.examples;
 
 import com.leandog.examples.robogherk.HelloRoboGherk;
-import com.leandog.robogherk.RoboGherkTester;
+import com.leandog.robogherk.Feature;
 
-public class MyFeatureTest extends RoboGherkTester {
+public class MyFeature extends Feature {
 
-    public MyFeatureTest() {
+    public MyFeature() {
         super(HelloRoboGherk.class, "com.leandog.robogherk.examples");
     }
 

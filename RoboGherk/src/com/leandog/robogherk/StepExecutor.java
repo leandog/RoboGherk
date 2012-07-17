@@ -17,7 +17,7 @@ public class StepExecutor {
         this.stepFinder = stepFinder;
     }
 
-    public void call(Class<? extends RoboGherkTester> feature, String action) throws RoboGherkException {
+    public void call(Class<? extends Feature> feature, String action) throws RoboGherkException {
         StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
         stepDefinitions.setTestDependecies(instrumentation, solo);
         try {

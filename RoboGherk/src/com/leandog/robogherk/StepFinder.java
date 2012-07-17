@@ -11,8 +11,8 @@ public class StepFinder {
         this.stepClassLoader = stepClassLoader;
     }
 
-    public StepDefinitions findStepsFor(Class<? extends RoboGherkTester> testCaseClass) throws RoboGherkException {
-        String stepDefinitionClassName = testCaseClass.getSimpleName().replace("Test","Steps");
+    public StepDefinitions findStepsFor(Class<? extends Feature> testCaseClass) throws RoboGherkException {
+        String stepDefinitionClassName = testCaseClass.getSimpleName().concat("Steps");
         return loadStepsClass(testCaseClass.getSimpleName(), packageName + "." + stepDefinitionClassName);
     }
     

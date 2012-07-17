@@ -5,14 +5,14 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
 
 @SuppressWarnings("rawtypes")
-public abstract class RoboGherkTester extends ActivityInstrumentationTestCase2 {
+public abstract class Feature extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
     private StepExecutor stepExecutor;
     private final String packageName;
 
     @SuppressWarnings("unchecked")
-    public RoboGherkTester(Class activityClass, String packageName) {
+    public Feature(Class activityClass, String packageName) {
         super(activityClass);
         this.packageName = packageName;
     }
