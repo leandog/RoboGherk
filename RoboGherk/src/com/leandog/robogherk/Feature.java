@@ -9,19 +9,17 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     private Solo solo;
     private StepExecutor stepExecutor;
-    private final String packageName;
 
     @SuppressWarnings("unchecked")
-    public Feature(Class<? extends Activity> activityClass, String packageNameContainingSteps) {
+    public Feature(Class<? extends Activity> activityClass) {
         super((Class<Activity>) activityClass);
-        this.packageName = packageNameContainingSteps;
     }
     
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation());
-        stepExecutor = new StepExecutor(new StepFinder(packageName, new RealStepClassLoader()));
+        stepExecutor = new StepExecutor(new StepFinder(new RealStepClassLoader()));
         stepExecutor.setup(getInstrumentation(), solo);
     }
 

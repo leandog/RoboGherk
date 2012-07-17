@@ -22,15 +22,15 @@ public class StepFinderTest {
     public void findsStepsForClass() throws Exception {
         doReturn(MyFeatureSteps.class).when(loader).loadClass(anyString());
        
-        new StepFinder("com.leandog.test.fake", loader).findStepsFor(MyFeature.class);
+        new StepFinder(loader).findStepsFor(MyFeature.class);
         
-        verify(loader).loadClass(eq("com.leandog.test.fake.MyFeatureSteps"));
+        verify(loader).loadClass(eq(MyFeature.class.getPackage().getName() + ".MyFeatureSteps"));
     }
     
     @Test(expected = NoStepsFoundException.class)
     public void throwsNoStepsFoundExceptionWhenCannotLoadSteps() throws Exception {
         when(loader.loadClass(anyString())).thenThrow(new ClassNotFoundException());
         
-        new StepFinder("com.leandog.test.fake", loader).findStepsFor(MyFeature.class);
+        new StepFinder(loader).findStepsFor(MyFeature.class);
     }
 }

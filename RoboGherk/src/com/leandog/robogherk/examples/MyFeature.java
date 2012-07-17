@@ -6,7 +6,7 @@ import com.leandog.robogherk.Feature;
 public class MyFeature extends Feature {
 
     public MyFeature() {
-        super(HelloRoboGherk.class, "com.leandog.robogherk.examples");
+        super(HelloRoboGherk.class);
     }
 
     public void test_A_working_scenario() throws Exception {
