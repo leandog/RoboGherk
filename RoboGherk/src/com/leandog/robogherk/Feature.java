@@ -1,22 +1,22 @@
 package com.leandog.robogherk;
 
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
-@SuppressWarnings("rawtypes")
-public abstract class Feature extends ActivityInstrumentationTestCase2 {
+public abstract class Feature extends ActivityInstrumentationTestCase2<Activity> {
 
     private Solo solo;
     private StepExecutor stepExecutor;
     private final String packageName;
 
     @SuppressWarnings("unchecked")
-    public Feature(Class activityClass, String packageName) {
-        super(activityClass);
-        this.packageName = packageName;
+    public Feature(Class<? extends Activity> activityClass, String packageNameContainingSteps) {
+        super((Class<Activity>) activityClass);
+        this.packageName = packageNameContainingSteps;
     }
-
+    
     @Override
     protected void setUp() throws Exception {
         super.setUp();
