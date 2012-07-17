@@ -19,7 +19,7 @@ public class StepFinderTest {
     private StepClassLoader loader = mock(StepClassLoader.class);
 
     @Test
-    public void findsStepsForClass() throws Exception {
+    public void checksFeaturePackageForSteps() throws Exception {
         doReturn(MyFeatureSteps.class).when(loader).loadClass(anyString());
        
         new StepFinder(loader).findStepsFor(MyFeature.class);
