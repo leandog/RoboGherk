@@ -12,4 +12,7 @@ public abstract class StepDefinitions {
         this.instrumentation = instrumentation;
         this.soloDriver = soloDriver;
     }
+
+    public void setUpScenario() {
+    }
 }

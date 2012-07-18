@@ -12,6 +12,7 @@ public class MyFeature extends Feature {
     public void test_A_working_scenario() throws Exception {
         Given("I am on the HelloRoboGherk activity");
         Then("my 'parameter' should work too");
+        AndThen("things that should have occured in setup have");
     }
 
 }

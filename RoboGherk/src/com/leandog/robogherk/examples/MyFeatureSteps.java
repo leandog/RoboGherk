@@ -6,11 +6,16 @@ import com.leandog.examples.robogherk.HelloRoboGherk;
 import com.leandog.robogherk.StepDefinitions;
 
 public class MyFeatureSteps extends StepDefinitions {
+   
+    public static boolean isTrueWhenSetupeScenarioIsCalled = false;
     
-    public void this_should_fail() {
+    @Override
+    public void setUpScenario() {
+       isTrueWhenSetupeScenarioIsCalled = true; 
     }
     
-    public void it_fails() {
+    public void things_that_should_have_occured_in_setup_have() {
+        Assert.assertTrue(isTrueWhenSetupeScenarioIsCalled);
     }
     
     public void I_am_on_the_HelloRoboGherk_activity() {

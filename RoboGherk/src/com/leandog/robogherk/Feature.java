@@ -21,6 +21,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         solo = new Solo(getInstrumentation());
         stepExecutor = new StepExecutor(new StepFinder(new RealStepClassLoader()));
         stepExecutor.setup(getInstrumentation(), solo);
+        stepExecutor.callSetUpScenario(getClass());
     }
 
     public void Given(String given) throws RoboGherkException {

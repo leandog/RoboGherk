@@ -10,9 +10,10 @@ import org.junit.Test;
 import android.app.Instrumentation;
 
 import com.jayway.android.robotium.solo.Solo;
+import com.leandog.robogherk.Feature;
 import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.RoboGherkException;
-import com.leandog.robogherk.Feature;
+import com.leandog.robogherk.StepDefinitions;
 import com.leandog.robogherk.StepExecutor;
 import com.leandog.robogherk.StepFinder;
 import com.leandog.robogherk.examples.MyFeature;
@@ -75,6 +76,17 @@ public class StepExecutorTest {
 
         stepExecutor = new StepExecutor(stepFinder);
         stepExecutor.call(testClass, "this should blow something else up");
+    }
+    
+    @Test
+    public void itCanPassThroughCallToSetUpScenario() throws Exception {
+        StepDefinitions stepStub = mock(StepDefinitions.class);
+        when(stepFinder.findStepsFor(testClass)).thenReturn(stepStub);
+       
+        stepExecutor = new StepExecutor(stepFinder);
+        stepExecutor.callSetUpScenario(testClass);
+     
+        verify(stepStub).setUpScenario();
     }
 
 }

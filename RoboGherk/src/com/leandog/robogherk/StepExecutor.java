@@ -63,4 +63,8 @@ public class StepExecutor {
 
         return action.replace(" ", "_");
     }
+
+    public void callSetUpScenario(Class<? extends Feature> testClass) throws RoboGherkException {
+        call(testClass, "setUpScenario");
+    }
 }
