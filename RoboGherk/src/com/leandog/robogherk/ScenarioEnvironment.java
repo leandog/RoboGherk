@@ -4,13 +4,12 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class ScenarioEnvironment {
     
-    public Solo solo;
-    public StepExecutor stepExecutor;
-    public StepDefinitions stepDefinitions;
+    private Solo solo;
+    private StepExecutor stepExecutor;
 
     public ScenarioEnvironment(Feature feature) {
         solo = new Solo(feature.getInstrumentation());
-        stepDefinitions = StepDefinitions.forClass(feature.getClass());
+        StepDefinitions stepDefinitions = StepDefinitions.forClass(feature.getClass());
         stepExecutor = new StepExecutor(stepDefinitions);
         stepExecutor.setUp(feature.getInstrumentation(), solo);
     }
@@ -22,5 +21,4 @@ public class ScenarioEnvironment {
     void executeStepDefinition(String action) {
         stepExecutor.call(action);
     }
-
 }
