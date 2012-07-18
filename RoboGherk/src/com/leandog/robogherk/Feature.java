@@ -3,7 +3,6 @@ package com.leandog.robogherk;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.jayway.android.robotium.solo.Solo;
 
 public abstract class Feature extends ActivityInstrumentationTestCase2<Activity> {
 
@@ -17,13 +16,9 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        environment = new ScenarioEnvironment(getInstrumentation());
-        environment.solo = new Solo(getInstrumentation());
-        environment.stepDefinitions = StepDefinitions.forClass(getClass());
-        environment.stepExecutor = new StepExecutor(environment.stepDefinitions);
-        environment.stepExecutor.setUp(getInstrumentation(), environment.solo);
+        environment = new ScenarioEnvironment(this);
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();

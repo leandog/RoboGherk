@@ -1,7 +1,5 @@
 package com.leandog.robogherk;
 
-import android.app.Instrumentation;
-
 import com.jayway.android.robotium.solo.Solo;
 
 public class ScenarioEnvironment {
@@ -10,7 +8,11 @@ public class ScenarioEnvironment {
     public StepExecutor stepExecutor;
     public StepDefinitions stepDefinitions;
 
-    public ScenarioEnvironment(Instrumentation instrumentation) {
+    public ScenarioEnvironment(Feature feature) {
+        solo = new Solo(feature.getInstrumentation());
+        stepDefinitions = StepDefinitions.forClass(feature.getClass());
+        stepExecutor = new StepExecutor(stepDefinitions);
+        stepExecutor.setUp(feature.getInstrumentation(), solo);
     }
 
     void tearDown() {
@@ -20,4 +22,5 @@ public class ScenarioEnvironment {
     void executeStepDefinition(String action) {
         stepExecutor.call(action);
     }
+
 }
