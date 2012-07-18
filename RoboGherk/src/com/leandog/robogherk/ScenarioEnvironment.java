@@ -7,11 +7,10 @@ public class ScenarioEnvironment {
     private Solo solo;
     private StepExecutor stepExecutor;
 
-    public ScenarioEnvironment(Feature feature) {
+    public ScenarioEnvironment(Feature feature, StepExecutor stepExecutor) {
         solo = new Solo(feature.getInstrumentation());
-        StepDefinitions stepDefinitions = StepDefinitions.forClass(feature.getClass());
-        stepExecutor = new StepExecutor(stepDefinitions);
-        stepExecutor.setUp(feature.getInstrumentation(), solo);
+        this.stepExecutor = stepExecutor;
+        this.stepExecutor.setUp(feature.getInstrumentation(), solo);
     }
 
     void tearDown() {

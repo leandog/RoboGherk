@@ -16,7 +16,9 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        environment = new ScenarioEnvironment(this);
+        StepDefinitions stepDefinitions = StepDefinitions.forClass(getClass());
+        StepExecutor stepExecutor = new StepExecutor(stepDefinitions);
+        environment = new ScenarioEnvironment(this, stepExecutor);
     }
 
     @Override
