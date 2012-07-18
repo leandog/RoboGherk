@@ -43,7 +43,7 @@ public class StepExecutor {
         return !"".equals(getArgumentFrom(action));
     }
 
-    public void setup(Instrumentation instrumentation, Solo solo) throws RoboGherkException {
+    public void setUp(Instrumentation instrumentation, Solo solo) throws RoboGherkException {
         stepDefinitions.setTestDependecies(instrumentation, solo);
         call("setUpScenario");
     }

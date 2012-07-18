@@ -22,7 +22,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         solo = new Solo(getInstrumentation());
         stepDefinitions = StepDefinitions.forClass(getClass());
         stepExecutor = new StepExecutor(stepDefinitions);
-        stepExecutor.setup(getInstrumentation(), solo);
+        stepExecutor.setUp(getInstrumentation(), solo);
     }
 
     public void Given(String given) throws RoboGherkException {

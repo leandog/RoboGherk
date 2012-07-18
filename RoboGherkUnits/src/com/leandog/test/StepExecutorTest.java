@@ -29,7 +29,7 @@ public class StepExecutorTest {
 
     @Test
     public void itProvidesTestDependenciesToTheSteps() throws RoboGherkException {
-        stepExecutor.setup(instrumentation, solo);
+        stepExecutor.setUp(instrumentation, solo);
         stepExecutor.call("I do the first thing");
 
         verify(stepStub).setTestDependecies(instrumentation, solo);
@@ -75,9 +75,17 @@ public class StepExecutorTest {
         StepDefinitions stepStub = mock(StepDefinitions.class);
        
         stepExecutor = new StepExecutor(stepStub);
-        stepExecutor.setup(instrumentation, solo);
+        stepExecutor.setUp(instrumentation, solo);
      
         verify(stepStub).setUpScenario();
+    }
+    
+    @Test
+    public void overridingSetupScenarioIsNotRequired() throws RoboGherkException {
+        StepDefinitions stepStub = new DoingThingsAndStuffSteps();
+       
+        stepExecutor = new StepExecutor(stepStub);
+        stepExecutor.setUp(instrumentation, solo);
     }
 
 }
