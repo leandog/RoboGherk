@@ -17,12 +17,12 @@ public class StepExecutor {
         this.stepDefinitions = stepDefinitions;
     }
 
-    public void call(Class<? extends Feature> feature, String action) throws RoboGherkException {
+    public void call(String action) throws RoboGherkException {
         stepDefinitions.setTestDependecies(instrumentation, solo);
         try {
             invoke(action, stepDefinitions);
         } catch (NoSuchMethodException e) {
-            throw new NoStepsFoundException(feature.getName(), e);
+            throw new NoStepsFoundException(stepDefinitions.getClass().getName(), e);
         } catch (InvocationTargetException e) {
             throw new RoboGherkException(e.getCause());
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class StepExecutor {
         return action.replace(" ", "_");
     }
 
-    public void callSetUpScenario(Class<? extends Feature> testClass) throws RoboGherkException {
-        call(testClass, "setUpScenario");
+    public void callSetUpScenario() throws RoboGherkException {
+        call("setUpScenario");
     }
 }
