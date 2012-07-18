@@ -19,7 +19,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        stepDefinitions = new StepFinder(new RealStepClassLoader()).findStepsFor(getClass());
+        stepDefinitions = StepDefinitions.forClass(getClass());
         solo = new Solo(getInstrumentation());
         stepExecutor = new StepExecutor(stepDefinitions);
         stepExecutor.setup(getInstrumentation(), solo);

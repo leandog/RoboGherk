@@ -15,4 +15,8 @@ public abstract class StepDefinitions {
 
     public void setUpScenario() {
     }
+
+    static StepDefinitions forClass(Class<? extends Feature> klass) throws RoboGherkException {
+        return new StepFinder(new RealStepClassLoader()).findStepsFor(klass);
+    }
 }
