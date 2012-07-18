@@ -9,8 +9,6 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class StepExecutor {
 
-    private Instrumentation instrumentation;
-    private Solo solo;
     private final StepDefinitions stepDefinitions;
 
     public StepExecutor(StepDefinitions stepDefinitions) {
@@ -18,7 +16,6 @@ public class StepExecutor {
     }
 
     public void call(String action) throws RoboGherkException {
-        stepDefinitions.setTestDependecies(instrumentation, solo);
         try {
             invoke(action);
         } catch (NoSuchMethodException e) {
@@ -46,9 +43,9 @@ public class StepExecutor {
         return !"".equals(getArgumentFrom(action));
     }
 
-    public void setup(Instrumentation instrumentation, Solo solo) {
-        this.instrumentation = instrumentation;
-        this.solo = solo;
+    public void setup(Instrumentation instrumentation, Solo solo) throws RoboGherkException {
+        stepDefinitions.setTestDependecies(instrumentation, solo);
+        call("setUpScenario");
     }
 
     private String getArgumentFrom(String action) {
@@ -61,9 +58,5 @@ public class StepExecutor {
         }
 
         return action.replace(" ", "_");
-    }
-
-    public void callSetUpScenario() throws RoboGherkException {
-        call("setUpScenario");
     }
 }

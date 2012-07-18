@@ -16,18 +16,19 @@ import com.leandog.robogherk.StepExecutor;
 import com.leandog.test.fake.DoingThingsAndStuffSteps;
 
 public class StepExecutorTest {
+    Instrumentation instrumentation;
+    Solo solo;
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);
-    StepExecutor stepExecutor;
-
+    StepExecutor stepExecutor = new StepExecutor(stepStub);
+    
     @Before
-    public void setUp() throws Exception {
-        stepExecutor = new StepExecutor(stepStub);
+    public void setUp() {
+        instrumentation = mock(Instrumentation.class);
+        solo = mock(Solo.class);
     }
 
     @Test
     public void itProvidesTestDependenciesToTheSteps() throws RoboGherkException {
-        Instrumentation instrumentation = mock(Instrumentation.class);
-        Solo solo = mock(Solo.class);
         stepExecutor.setup(instrumentation, solo);
         stepExecutor.call("I do the first thing");
 
@@ -74,7 +75,7 @@ public class StepExecutorTest {
         StepDefinitions stepStub = mock(StepDefinitions.class);
        
         stepExecutor = new StepExecutor(stepStub);
-        stepExecutor.callSetUpScenario();
+        stepExecutor.setup(instrumentation, solo);
      
         verify(stepStub).setUpScenario();
     }

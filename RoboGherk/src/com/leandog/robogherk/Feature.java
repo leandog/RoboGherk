@@ -19,11 +19,10 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        stepDefinitions = StepDefinitions.forClass(getClass());
         solo = new Solo(getInstrumentation());
+        stepDefinitions = StepDefinitions.forClass(getClass());
         stepExecutor = new StepExecutor(stepDefinitions);
         stepExecutor.setup(getInstrumentation(), solo);
-        stepExecutor.callSetUpScenario();
     }
 
     public void Given(String given) throws RoboGherkException {
