@@ -20,7 +20,7 @@ public class StepExecutor {
     public void call(String action) throws RoboGherkException {
         stepDefinitions.setTestDependecies(instrumentation, solo);
         try {
-            invoke(action, stepDefinitions);
+            invoke(action);
         } catch (NoSuchMethodException e) {
             throw new NoStepsFoundException(stepDefinitions.getClass().getName(), e);
         } catch (InvocationTargetException e) {
@@ -30,7 +30,7 @@ public class StepExecutor {
         }
     }
 
-    private void invoke(String action, StepDefinitions stepDefinitions) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    private void invoke(String action) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String methodName = getMethodNameFrom(action);
 
         if (hasArguments(action)) {
