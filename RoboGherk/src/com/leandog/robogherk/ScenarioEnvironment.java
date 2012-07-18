@@ -16,4 +16,8 @@ public class ScenarioEnvironment {
     void tearDown() {
         solo.finishOpenedActivities();
     }
+
+    void call(String action) {
+        stepExecutor.call(action);
+    }
 }

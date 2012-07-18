@@ -52,6 +52,6 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     private void call(String action) {
         getActivity();
-        environment.stepExecutor.call(action);
+        environment.call(action);
     }
 }
