@@ -17,7 +17,7 @@ public class ScenarioEnvironment {
         solo.finishOpenedActivities();
     }
 
-    void call(String action) {
+    void executeStepDefinition(String action) {
         stepExecutor.call(action);
     }
 }
