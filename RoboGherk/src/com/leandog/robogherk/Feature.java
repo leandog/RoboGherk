@@ -17,7 +17,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        environment = new ScenarioEnvironment();
+        environment = new ScenarioEnvironment(getInstrumentation());
         environment.solo = new Solo(getInstrumentation());
         environment.stepDefinitions = StepDefinitions.forClass(getClass());
         environment.stepExecutor = new StepExecutor(environment.stepDefinitions);
@@ -27,7 +27,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        environment.solo.finishOpenedActivities();
+        environment.tearDown();
     }
 
     public void Given(String given) {
