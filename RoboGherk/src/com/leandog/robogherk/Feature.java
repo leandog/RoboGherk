@@ -7,7 +7,7 @@ import com.jayway.android.robotium.solo.Solo;
 
 public abstract class Feature extends ActivityInstrumentationTestCase2<Activity> {
 
-    private FeatureEnvironment environment;
+    private ScenarioEnvironment environment;
 
     @SuppressWarnings("unchecked")
     public Feature(Class<? extends Activity> activityClass) {
@@ -17,7 +17,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        environment = new FeatureEnvironment();
+        environment = new ScenarioEnvironment();
         environment.solo = new Solo(getInstrumentation());
         environment.stepDefinitions = StepDefinitions.forClass(getClass());
         environment.stepExecutor = new StepExecutor(environment.stepDefinitions);

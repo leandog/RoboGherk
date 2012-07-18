@@ -2,7 +2,7 @@ package com.leandog.robogherk;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class FeatureEnvironment {
+public class ScenarioEnvironment {
     
     public Solo solo;
     public StepExecutor stepExecutor;
