@@ -25,4 +25,8 @@ public class MyFeatureSteps extends StepDefinitions {
     public void my_arg_should_work_too(String arg) {
         Assert.assertEquals("parameter", arg);
     }
+    
+    public void I_go_to_another_screen() {
+        soloDriver.clickOnText("click me");
+    }
 }

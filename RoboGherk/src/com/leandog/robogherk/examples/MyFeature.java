@@ -13,6 +13,7 @@ public class MyFeature extends Feature {
         Given("I am on the HelloRoboGherk activity");
         Then("my 'parameter' should work too");
         AndThen("things that should have occured in setup have");
+        AndThen("I go to another screen");
     }
 
 }

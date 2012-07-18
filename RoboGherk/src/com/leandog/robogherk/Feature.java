@@ -24,6 +24,12 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         stepExecutor = new StepExecutor(stepDefinitions);
         stepExecutor.setUp(getInstrumentation(), solo);
     }
+    
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        solo.finishOpenedActivities();
+    }
 
     public void Given(String given) {
         call(given);
