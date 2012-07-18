@@ -15,7 +15,7 @@ public class StepExecutor {
         this.stepDefinitions = stepDefinitions;
     }
 
-    public void call(String action) throws RoboGherkException {
+    public void call(String action) {
         try {
             invoke(action);
         } catch (NoSuchMethodException e) {

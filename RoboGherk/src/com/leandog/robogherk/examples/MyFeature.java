@@ -9,7 +9,7 @@ public class MyFeature extends Feature {
         super(HelloRoboGherk.class);
     }
 
-    public void test_A_working_scenario() throws Exception {
+    public void test_A_working_scenario() {
         Given("I am on the HelloRoboGherk activity");
         Then("my 'parameter' should work too");
         AndThen("things that should have occured in setup have");

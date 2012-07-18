@@ -25,27 +25,27 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         stepExecutor.setUp(getInstrumentation(), solo);
     }
 
-    public void Given(String given) throws RoboGherkException {
+    public void Given(String given) {
         call(given);
     }
 
-    public void When(String when) throws RoboGherkException {
+    public void When(String when) {
         call(when);
     }
 
-    public void Then(String then) throws RoboGherkException {
+    public void Then(String then) {
         call(then);
     }
 
-    public void AndThen(String then) throws RoboGherkException {
+    public void AndThen(String then) {
         call(then);
     }
 
-    public void AndWhen(String when) throws RoboGherkException {
+    public void AndWhen(String when) {
         call(when);
     }
 
-    private void call(String action) throws RoboGherkException {
+    private void call(String action) {
         getActivity();
         stepExecutor.call(action);
     }
