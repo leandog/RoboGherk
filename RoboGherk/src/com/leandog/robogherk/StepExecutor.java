@@ -9,16 +9,15 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class StepExecutor {
 
-    private final StepFinder stepFinder;
     private Instrumentation instrumentation;
     private Solo solo;
+    private final StepDefinitions stepDefinitions;
 
-    public StepExecutor(StepFinder stepFinder) {
-        this.stepFinder = stepFinder;
+    public StepExecutor(StepDefinitions stepDefinitions) {
+        this.stepDefinitions = stepDefinitions;
     }
 
     public void call(Class<? extends Feature> feature, String action) throws RoboGherkException {
-        StepDefinitions stepDefinitions = stepFinder.findStepsFor(feature);
         stepDefinitions.setTestDependecies(instrumentation, solo);
         try {
             invoke(action, stepDefinitions);

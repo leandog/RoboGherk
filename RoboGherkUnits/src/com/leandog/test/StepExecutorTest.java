@@ -2,7 +2,6 @@ package com.leandog.test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,20 +14,17 @@ import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.RoboGherkException;
 import com.leandog.robogherk.StepDefinitions;
 import com.leandog.robogherk.StepExecutor;
-import com.leandog.robogherk.StepFinder;
 import com.leandog.robogherk.examples.MyFeature;
 import com.leandog.test.fake.DoingThingsAndStuffSteps;
 
 public class StepExecutorTest {
     Class<? extends Feature> testClass = MyFeature.class;
-    StepFinder stepFinder = mock(StepFinder.class);
     DoingThingsAndStuffSteps stepStub = mock(DoingThingsAndStuffSteps.class);
     StepExecutor stepExecutor;
 
     @Before
     public void setUp() throws Exception {
-        when(stepFinder.findStepsFor(testClass)).thenReturn(stepStub);
-        stepExecutor = new StepExecutor(stepFinder);
+        stepExecutor = new StepExecutor(stepStub);
     }
 
     @Test
@@ -63,27 +59,24 @@ public class StepExecutorTest {
     @Test(expected = RoboGherkException.class)
     public void itTellsMeWhenAnAssertionFails() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
-        when(stepFinder.findStepsFor(testClass)).thenReturn(stepStub);
 
-        stepExecutor = new StepExecutor(stepFinder);
+        stepExecutor = new StepExecutor(stepStub);
         stepExecutor.call(testClass, "I should fail an assertion");
     }
 
     @Test(expected = RoboGherkException.class)
     public void itTellsMeTheCauseOfMyStepFailure() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
-        when(stepFinder.findStepsFor(testClass)).thenReturn(stepStub);
 
-        stepExecutor = new StepExecutor(stepFinder);
+        stepExecutor = new StepExecutor(stepStub);
         stepExecutor.call(testClass, "this should blow something else up");
     }
     
     @Test
     public void itCanPassThroughCallToSetUpScenario() throws Exception {
         StepDefinitions stepStub = mock(StepDefinitions.class);
-        when(stepFinder.findStepsFor(testClass)).thenReturn(stepStub);
        
-        stepExecutor = new StepExecutor(stepFinder);
+        stepExecutor = new StepExecutor(stepStub);
         stepExecutor.callSetUpScenario(testClass);
      
         verify(stepStub).setUpScenario();

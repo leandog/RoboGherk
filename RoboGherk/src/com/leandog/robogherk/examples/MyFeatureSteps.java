@@ -7,7 +7,7 @@ import com.leandog.robogherk.StepDefinitions;
 
 public class MyFeatureSteps extends StepDefinitions {
    
-    public static boolean isTrueWhenSetupeScenarioIsCalled = false;
+    private boolean isTrueWhenSetupeScenarioIsCalled = false;
     
     @Override
     public void setUpScenario() {

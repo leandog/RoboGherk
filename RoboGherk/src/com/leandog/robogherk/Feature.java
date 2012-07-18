@@ -9,6 +9,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     private Solo solo;
     private StepExecutor stepExecutor;
+    private StepDefinitions stepDefinitions;
 
     @SuppressWarnings("unchecked")
     public Feature(Class<? extends Activity> activityClass) {
@@ -18,8 +19,9 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        stepDefinitions = new StepFinder(new RealStepClassLoader()).findStepsFor(getClass());
         solo = new Solo(getInstrumentation());
-        stepExecutor = new StepExecutor(new StepFinder(new RealStepClassLoader()));
+        stepExecutor = new StepExecutor(stepDefinitions);
         stepExecutor.setup(getInstrumentation(), solo);
         stepExecutor.callSetUpScenario(getClass());
     }
