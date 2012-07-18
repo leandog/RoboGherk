@@ -13,7 +13,7 @@ public abstract class StepDefinitions {
         this.soloDriver = soloDriver;
     }
 
-    public void setUpScenario() {
+    public void setUpScenario() throws Exception {
     }
 
     static StepDefinitions forClass(Class<? extends Feature> klass) throws RoboGherkException {
