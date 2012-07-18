@@ -7,9 +7,7 @@ import com.jayway.android.robotium.solo.Solo;
 
 public abstract class Feature extends ActivityInstrumentationTestCase2<Activity> {
 
-    private Solo solo;
-    private StepExecutor stepExecutor;
-    private StepDefinitions stepDefinitions;
+    private FeatureEnvironment environment;
 
     @SuppressWarnings("unchecked")
     public Feature(Class<? extends Activity> activityClass) {
@@ -19,16 +17,17 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        solo = new Solo(getInstrumentation());
-        stepDefinitions = StepDefinitions.forClass(getClass());
-        stepExecutor = new StepExecutor(stepDefinitions);
-        stepExecutor.setUp(getInstrumentation(), solo);
+        environment = new FeatureEnvironment();
+        environment.solo = new Solo(getInstrumentation());
+        environment.stepDefinitions = StepDefinitions.forClass(getClass());
+        environment.stepExecutor = new StepExecutor(environment.stepDefinitions);
+        environment.stepExecutor.setUp(getInstrumentation(), environment.solo);
     }
     
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        solo.finishOpenedActivities();
+        environment.solo.finishOpenedActivities();
     }
 
     public void Given(String given) {
@@ -53,6 +52,6 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     private void call(String action) {
         getActivity();
-        stepExecutor.call(action);
+        environment.stepExecutor.call(action);
     }
 }
