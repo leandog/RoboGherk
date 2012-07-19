@@ -1,5 +1,7 @@
 package com.leandog.robogherk;
 
+import com.jayway.android.robotium.solo.Solo;
+
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -18,7 +20,9 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         super.setUp();
         StepDefinitions stepDefinitions = StepDefinitions.forClass(getClass());
         StepExecutor stepExecutor = new StepExecutor(stepDefinitions);
-        environment = new ScenarioEnvironment(this, stepExecutor);
+        Solo solo = new Solo(getInstrumentation());
+        stepExecutor.setUp(getInstrumentation(), solo);
+        environment = new ScenarioEnvironment(stepExecutor, solo);
     }
 
     @Override
