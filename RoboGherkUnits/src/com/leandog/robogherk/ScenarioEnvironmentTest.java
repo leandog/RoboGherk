@@ -10,13 +10,20 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class ScenarioEnvironmentTest {
 
-    private Solo solo = mock(Solo.class);
-    private ScenarioEnvironment scenarioEnvironment = new ScenarioEnvironment(null, solo);
+    Solo solo = mock(Solo.class);
+    StepExecutor stepExecutor = mock(StepExecutor.class);
+    ScenarioEnvironment scenarioEnvironment = new ScenarioEnvironment(stepExecutor, solo);
 
     @Test
     public void finishesOpenActivitiesOnTearDown() {
         scenarioEnvironment.tearDown();
         verify(solo).finishOpenedActivities();
+    }
+    
+    @Test
+    public void executingAStepIsDelegatedToTheExecutor() {
+       scenarioEnvironment.executeStepDefinition("make members private"); 
+       verify(stepExecutor).call("make members private");
     }
 
 }
