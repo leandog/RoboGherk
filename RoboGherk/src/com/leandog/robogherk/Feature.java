@@ -18,11 +18,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        StepDefinitions stepDefinitions = StepDefinitions.forClass(getClass());
-        StepExecutor stepExecutor = new StepExecutor(stepDefinitions);
-        Solo solo = new Solo(getInstrumentation());
-        stepExecutor.setUp(getInstrumentation(), solo);
-        environment = new ScenarioEnvironment(stepExecutor, solo);
+        environment = buildEnvironment();
     }
 
     @Override
@@ -49,6 +45,14 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     public void AndWhen(String when) {
         call(when);
+    }
+
+    private ScenarioEnvironment buildEnvironment() throws RoboGherkException {
+        StepDefinitions stepDefinitions = StepDefinitions.forClass(getClass());
+        StepExecutor stepExecutor = new StepExecutor(stepDefinitions);
+        Solo solo = new Solo(getInstrumentation());
+        stepExecutor.setUp(getInstrumentation(), solo);
+        return new ScenarioEnvironment(stepExecutor, solo);
     }
 
     private void call(String action) {
