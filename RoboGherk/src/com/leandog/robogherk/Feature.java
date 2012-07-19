@@ -1,6 +1,5 @@
 package com.leandog.robogherk;
 
-import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -18,7 +17,7 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        environment = buildEnvironment();
+        environment = ScenarioEnvironment.buildEnvironment(getClass(), getInstrumentation());
     }
 
     @Override
@@ -45,14 +44,6 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     public void AndWhen(String when) {
         call(when);
-    }
-
-    private ScenarioEnvironment buildEnvironment() throws RoboGherkException {
-        StepDefinitions stepDefinitions = StepDefinitions.forClass(getClass());
-        StepExecutor stepExecutor = new StepExecutor(stepDefinitions);
-        Solo solo = new Solo(getInstrumentation());
-        stepExecutor.setUp(getInstrumentation(), solo);
-        return new ScenarioEnvironment(stepExecutor, solo);
     }
 
     private void call(String action) {
