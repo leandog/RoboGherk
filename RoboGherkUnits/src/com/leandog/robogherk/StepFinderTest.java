@@ -1,4 +1,4 @@
-package com.leandog.test;
+package com.leandog.robogherk;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
