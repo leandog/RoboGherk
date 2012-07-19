@@ -26,24 +26,20 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
         environment.tearDown();
     }
 
-    public void Given(String given) {
-        call(given);
+    public void Given(String stepName) {
+        call(stepName);
     }
 
-    public void When(String when) {
-        call(when);
+    public void When(String stepName) {
+        call(stepName);
     }
 
-    public void Then(String then) {
-        call(then);
+    public void Then(String stepName) {
+        call(stepName);
     }
 
-    public void AndThen(String then) {
-        call(then);
-    }
-
-    public void AndWhen(String when) {
-        call(when);
+    public void And(String stepName) {
+        call(stepName);
     }
 
     private void call(String action) {

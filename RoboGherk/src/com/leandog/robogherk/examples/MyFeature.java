@@ -12,8 +12,8 @@ public class MyFeature extends Feature {
     public void test_A_working_scenario() {
         Given("I am on the HelloRoboGherk activity");
         Then("my 'parameter' should work too");
-        AndThen("things that should have occured in setup have");
-        AndThen("I go to another screen");
+        And("things that should have occured in setup have");
+        And("I go to another screen");
     }
 
 }
