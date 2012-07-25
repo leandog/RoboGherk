@@ -15,14 +15,12 @@ public class StepFinder {
     }
     
     private StepDefinitions loadStepsClass(String feature, String className) {
-        StepDefinitions steps = null;
         try {
             Class<?> stepClass = stepClassLoader.loadClass(className);
-            steps = (StepDefinitions) stepClass.newInstance();
+            return (StepDefinitions) stepClass.newInstance();
         } catch (Exception e) {
             throw new NoStepsFoundException(feature, e);
         }
-        return steps;
     }
     
 }
