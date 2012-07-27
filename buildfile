@@ -18,10 +18,7 @@ define "RoboGherk" do
       'com.google.android:android-test:jar:4.0.1.2',
       'junit:junit:jar:3.8.2',
       'com.jayway.android.robotium:robotium-solo:jar:3.3'
-  end
-
-  define "RoboGherkUnits" do
-    compile.with 'com.jayway.android.robotium:robotium-solo:jar:3.3'
+    test.with 'org.mockito:mockito-all:jar:1.9.0'
   end
 
 end
