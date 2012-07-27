@@ -59,4 +59,8 @@ public class StepExecutor {
 
         return action.replace(" ", "_");
     }
+
+    public void tearDown() {
+        call("cleanUpScenario");
+    }
 }
