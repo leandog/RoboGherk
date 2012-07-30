@@ -1,4 +1,3 @@
-
 repositories.remote << "http://repo1.maven.org/maven2"
 
 desc "The RoboGherk project"
@@ -8,7 +7,7 @@ define "RoboGherk" do
   project.group = "com.leandog.robogherk"
   manifest["Implementation-Vendor"] = "LeanDog"
 
-  define "HelloRoboGherk" do
+  define "ExampleApp" do
     extend BuildrExt::Android
     android.platform = 'android-14'
   end
