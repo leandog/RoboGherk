@@ -19,6 +19,7 @@ define "RoboGherk" do
       'junit:junit:jar:3.8.2',
       'com.jayway.android.robotium:robotium-solo:jar:3.3'
     test.with 'org.mockito:mockito-all:jar:1.9.0'
+    package :jar
   end
 
 end
