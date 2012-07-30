@@ -10,6 +10,7 @@ define "RoboGherk" do
   define "ExampleApp" do
     extend BuildrExt::Android
     android.platform = 'android-14'
+    package :apk 
   end
 
   define "RoboGherk" do
