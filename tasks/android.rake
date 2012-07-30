@@ -1,4 +1,5 @@
 require 'buildr/core/common'
+require 'shellwords'
 
 module BuildrExt
   module Android
@@ -321,6 +322,7 @@ module BuildrExt
       end
 
       def run_tests(device, apk)
+        desc "Run Android test"
         task "android_unit_tests_#{apk.name}_#{device[:serial]}" => apk do
           trace "Executing unit tests in #{apk.name} on device #{device}"
           junit_file = "/sdcard/#{device[:serial]}-junit.xml"
@@ -481,21 +483,7 @@ module BuildrExt
         raise "Could not execute #{tool}: file not found" unless File.exists?(tool)
 
         if (options[:capture_output])
-          out = StringIO.new
-          old_stdout = $stdout
-          old_stderr = $stderr
-          begin
-            $stdout = out
-            $stderr = out
-            system(tool, *args)
-          ensure
-            $stdout = old_stdout
-            $stderr = old_stderr
-            out.close
-            out.rewind
-          end
-
-          output = out.string
+          output = `#{tool.shellescape} #{args.shelljoin}`  
         else
           system(tool, *args)
           output = ""
