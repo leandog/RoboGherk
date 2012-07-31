@@ -2,8 +2,8 @@ package com.leandog.robogherk.exercises;
 
 import junit.framework.Assert;
 
-import com.leandog.examples.robogherk.FirstActivity;
 import com.leandog.robogherk.StepDefinitions;
+import com.leandog.robogherk.example_app.FirstActivity;
 
 public class MyFeatureSteps extends StepDefinitions {
    

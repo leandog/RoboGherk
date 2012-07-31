@@ -1,7 +1,7 @@
 package com.leandog.robogherk.exercises;
 
-import com.leandog.examples.robogherk.FirstActivity;
 import com.leandog.robogherk.Feature;
+import com.leandog.robogherk.example_app.FirstActivity;
 
 public class MySecondFeature extends Feature {
 

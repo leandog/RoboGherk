@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.leandog.robogherk.exercises"
+    package="com.leandog.robogherk.example_app"
     android:versionCode="1"
     android:versionName="1.0" >
 

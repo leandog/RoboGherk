@@ -1,4 +1,4 @@
-package com.leandog.examples.robogherk;
+package com.leandog.robogherk.example_app;
 
 import android.app.Activity;
 
