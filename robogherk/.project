@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ExampleApp</name>
+	<name>RoboGherk_robogherk</name>
 	<comment></comment>
 	<projects>
+		<project>HelloRoboGherk</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
