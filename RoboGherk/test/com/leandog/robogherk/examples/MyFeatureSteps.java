@@ -2,7 +2,7 @@ package com.leandog.robogherk.examples;
 
 import junit.framework.Assert;
 
-import com.leandog.examples.robogherk.HelloRoboGherk;
+import com.leandog.examples.robogherk.FirstActivity;
 import com.leandog.robogherk.StepDefinitions;
 
 public class MyFeatureSteps extends StepDefinitions {
@@ -19,7 +19,7 @@ public class MyFeatureSteps extends StepDefinitions {
     }
     
     public void I_am_on_the_HelloRoboGherk_activity() {
-        soloDriver.assertCurrentActivity("Not on launcher!", HelloRoboGherk.class);
+        soloDriver.assertCurrentActivity("Not on launcher!", FirstActivity.class);
     }
     
     public void my_arg_should_work_too(String arg) {

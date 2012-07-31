@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class HelloRoboGherk extends Activity {
+public class FirstActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class HelloRoboGherk extends Activity {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HelloRoboGherk.this, AlohaRoboGherk.class));
+                startActivity(new Intent(FirstActivity.this, SecondActivity.class));
             }
         });
     }

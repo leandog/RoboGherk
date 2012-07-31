@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".HelloRoboGherk"
+            android:name=".FirstActivity"
             android:label="@string/title_activity_hello_robo_gherk" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".AlohaRoboGherk"></activity>
+        <activity android:name=".SecondActivity"></activity>
     </application>
 
 </manifest>
