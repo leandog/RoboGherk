@@ -1,7 +1,5 @@
 package com.leandog.examples.robogherk;
 
-import com.leandog.examples.robogherk.R.id;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.leandog.robogherk.exercises.R;
+import com.leandog.robogherk.exercises.R.id;
 
 public class FirstActivity extends Activity {
 

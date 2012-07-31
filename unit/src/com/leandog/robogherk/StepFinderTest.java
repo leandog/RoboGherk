@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.leandog.robogherk.NoStepsFoundException;
 import com.leandog.robogherk.StepClassLoader;
 import com.leandog.robogherk.StepFinder;
-import com.leandog.robogherk.examples.MyFeature;
+import com.leandog.robogherk.exercises.MyFeature;
 import com.leandog.test.fake.MyFeatureSteps;
 
 public class StepFinderTest {

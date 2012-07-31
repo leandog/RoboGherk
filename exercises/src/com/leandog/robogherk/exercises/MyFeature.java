@@ -1,4 +1,4 @@
-package com.leandog.robogherk.examples;
+package com.leandog.robogherk.exercises;
 
 import com.leandog.examples.robogherk.FirstActivity;
 import com.leandog.robogherk.Feature;
