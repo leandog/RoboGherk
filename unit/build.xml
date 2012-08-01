@@ -1,0 +1,11 @@
+<project name="unit" default="test" basedir=".">
+    <property name="output.dir" location="bin/ant"/>
+  
+    <target name="test">
+        <mkdir dir="${output.dir}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${output.dir}"/>
+    </target>
+</project>
