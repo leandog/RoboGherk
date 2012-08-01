@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".FirstActivity"
-            android:label="@string/title_activity_hello_robo_gherk" >
+            android:label="@string/activity_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

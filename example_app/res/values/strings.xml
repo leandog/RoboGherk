@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="app_name">HelloRoboGherk</string>
+    <string name="app_name">ExampleApp for RoboGherk</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_hello_robo_gherk">HelloRoboGherk</string>
+    <string name="activity_title">I am your example app for RoboGherk</string>
 
 </resources>
