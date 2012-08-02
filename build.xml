@@ -15,4 +15,10 @@
             target="test"/>
     </target>
 
+    <target name="clean">
+        <ant dir="robogherk" target="clean"/>
+        <ant dir="example_app" target="clean"/>
+        <ant dir="exercises" target="clean"/>
+        <ant dir="unit" target="clean"/>
+    </target>
 </project>
