@@ -1,6 +1,38 @@
 <project name="robogherk" default="run" basedir=".">
 
-    <target name="run">
+    <available file="robogherk/local.properties" property="robogherk.local.properties.exists" />
+    <target name="create-robogherk-local.properties" unless="robogherk.local.properties.exists">
+        <exec executable="android">
+            <arg value="update"/>
+            <arg value="project"/>
+            <arg value="-p"/>
+            <arg value="robogherk"/>
+        </exec>
+    </target>
+
+    <available file="example_app/local.properties" property="example_app.local.properties.exists" />
+    <target name="create-example_app-local.properties" unless="example_app.local.properties.exists">
+        <exec executable="android">
+            <arg value="update"/>
+            <arg value="project"/>
+            <arg value="-p"/>
+            <arg value="example_app"/>
+        </exec>
+    </target>
+
+    <available file="exercises/local.properties" property="exercises.local.properties.exists" />
+    <target name="create-exercises-local.properties" unless="exercises.local.properties.exists">
+        <exec executable="android">
+            <arg value="update"/>
+            <arg value="project"/>
+            <arg value="-p"/>
+            <arg value="exercises"/>
+        </exec>
+    </target>
+
+    <target name="create-local.properties" depends="create-robogherk-local.properties,create-example_app-local.properties,create-exercises-local.properties" />
+
+    <target name="run" depends="create-local.properties">
         <ant inheritAll="false" 
             dir="robogherk" 
             target="debug"/>
