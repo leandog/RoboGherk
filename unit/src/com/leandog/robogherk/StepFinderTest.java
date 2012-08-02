@@ -1,17 +1,9 @@
 package com.leandog.robogherk;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
-import com.leandog.robogherk.NoStepsFoundException;
-import com.leandog.robogherk.StepClassLoader;
-import com.leandog.robogherk.StepFinder;
-import com.leandog.robogherk.exercises.MyFeature;
 import com.leandog.test.fake.MyFeatureSteps;
 
 public class StepFinderTest {
@@ -22,15 +14,15 @@ public class StepFinderTest {
     public void checksFeaturePackageForSteps() throws Exception {
         doReturn(MyFeatureSteps.class).when(loader).loadClass(anyString());
        
-        new StepFinder(loader).findStepsFor(MyFeature.class);
+        new StepFinder(loader).findStepsFor(Feature.class);
         
-        verify(loader).loadClass(eq(MyFeature.class.getPackage().getName() + ".MyFeatureSteps"));
+        verify(loader).loadClass(eq(Feature.class.getPackage().getName() + ".FeatureSteps"));
     }
     
     @Test(expected = NoStepsFoundException.class)
     public void throwsNoStepsFoundExceptionWhenCannotLoadSteps() throws Exception {
         when(loader.loadClass(anyString())).thenThrow(new ClassNotFoundException());
         
-        new StepFinder(loader).findStepsFor(MyFeature.class);
+        new StepFinder(loader).findStepsFor(Feature.class);
     }
 }
