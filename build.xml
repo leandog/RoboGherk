@@ -63,4 +63,6 @@
         <ant dir="unit" target="clean"/>
     </target>
 
+    <target name="ci-build" depends="clean,stage-artifacts" />
+
 </project>
