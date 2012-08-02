@@ -3,7 +3,6 @@
     <property name="java_source.dir" location="src"/>
     <property name="robogherk.dir" location="../robogherk/bin/classes"/>
     <property name="exercises.dir" location="../exercises/bin/classes"/>
-  
     <target name="test">
         <mkdir dir="${output.dir}"/>
         <javac srcdir="${java_source.dir}" 
@@ -19,12 +18,12 @@
             haltonfailure="true">
             <formatter type="plain" usefile="no" />
             <classpath>
-                <fileset includes="mockito*.*" dir="libs"/>
-                <fileset includes="junit*.*" dir="libs"/>
+                <pathelement location="libs/mockito-all-1.8.5.jar"/>
+                <pathelement location="libs/junit-4.10.jar"/>
                 <pathelement location="${robogherk.dir}"/>
                 <fileset dir="../robogherk/libs"/>
                 <pathelement location="${output.dir}"/>
-                <fileset includes="android*.*" dir="libs"/>
+                <pathelement location="libs/android.jar"/>
                 <pathelement location="${exercises.dir}"/>
             </classpath>
             <batchtest>
