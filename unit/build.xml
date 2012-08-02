@@ -8,9 +8,12 @@
         <javac srcdir="${java_source.dir}" 
             destdir="${output.dir}" >
             <classpath>
-                <fileset dir="libs"/>
-                <fileset dir="../robogherk/libs"/>
+                <pathelement location="libs/mockito-all-1.8.5.jar"/>
+                <pathelement location="libs/junit-4.10.jar"/>
                 <pathelement location="${robogherk.dir}"/>
+                <fileset dir="../robogherk/libs"/>
+                <pathelement location="${output.dir}"/>
+                <pathelement location="libs/android.jar"/>
                 <pathelement location="${exercises.dir}"/>
             </classpath>
         </javac>
