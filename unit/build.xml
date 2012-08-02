@@ -1,9 +1,10 @@
 <project name="unit" default="test" basedir=".">
+
     <property name="output.dir" location="bin/ant"/>
     <property name="java_source.dir" location="src"/>
     <property name="robogherk.dir" location="../robogherk/bin/classes"/>
     <property name="exercises.dir" location="../exercises/bin/classes"/>
-    <path id="class.path">
+    <path id="classpath">
         <pathelement location="libs/mockito-all-1.8.5.jar"/>
         <pathelement location="libs/junit-4.10.jar"/>
         <pathelement location="${robogherk.dir}"/>
@@ -12,23 +13,28 @@
         <pathelement location="libs/android.jar"/>
         <pathelement location="${exercises.dir}"/>
     </path>
+
     <target name="test">
         <mkdir dir="${output.dir}"/>
+
         <javac srcdir="${java_source.dir}" 
             destdir="${output.dir}" >
-        <classpath refid="class.path"/> 
+            <classpath refid="classpath"/> 
         </javac>
+
         <junit haltonerror="yes"
             haltonfailure="true">
             <formatter type="plain" usefile="no" />
-            <classpath refid="class.path"/>
+            <classpath refid="classpath"/>
             <batchtest>
                 <fileset dir="${java_source.dir}" includes="**/*Test.java"/>
             </batchtest>
         </junit>
+
     </target>
 
     <target name="clean">
         <delete dir="${output.dir}"/>
     </target>
+
 </project>
