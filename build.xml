@@ -1,9 +1,10 @@
-<project name="robogherk" default="run" basedir=".">
+<project name="robogherk" default="build" basedir=".">
 
     <target name="create-local.properties" depends="
         create-robogherk-local.properties,
         create-example_app-local.properties,
-        create-exercises-local.properties" />
+        create-exercises-local.properties
+        " />
 
     <available file="robogherk/local.properties" property="robogherk.local.properties.exists" />
     <target name="create-robogherk-local.properties" unless="robogherk.local.properties.exists">
@@ -35,7 +36,7 @@
         </exec>
     </target>
 
-    <target name="run" depends="create-local.properties">
+    <target name="build" depends="create-local.properties">
         <ant dir="robogherk" target="debug"/>
         <ant dir="example_app" target="debug-install"/>
         <ant dir="exercises" target="test"/>
