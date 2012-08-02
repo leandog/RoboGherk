@@ -1,5 +1,7 @@
 <project name="robogherk" default="build" basedir=".">
 
+    <!-- Generating */local.properties -->
+
     <target name="create-local.properties" depends="
         create-robogherk-local.properties,
         create-example_app-local.properties,
@@ -37,11 +39,19 @@
         <delete file="${project.dir}/proguard-project.txt" />
     </target>
 
+    <!-- The usual targets -->
+
     <target name="build" depends="create-local.properties">
-        <ant dir="robogherk" target="debug"/>
+        <ant dir="robogherk" target="release-jars"/>
         <ant dir="example_app" target="debug-install"/>
         <ant dir="exercises" target="test"/>
         <ant dir="unit" target="test"/>
+
+        <delete dir="target" />
+        <mkdir dir="target" />
+        <copy todir="target">
+            <fileset dir="robogherk/bin/release-jars" />
+        </copy>
     </target>
 
     <target name="clean">
@@ -50,4 +60,5 @@
         <ant dir="exercises" target="clean"/>
         <ant dir="unit" target="clean"/>
     </target>
+
 </project>

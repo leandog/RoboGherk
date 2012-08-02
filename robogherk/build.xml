@@ -16,6 +16,28 @@
             unless="sdk.dir"
     />
 
+    <tempfile property="version.file" />
+    <exec executable="/bin/sh">
+        <arg value="-c" />
+        <arg value="git describe | sed -e 's/^v/version=/' &gt; ${version.file}" />
+    </exec>
+    <loadproperties srcFile="${version.file}" />
+    <delete file="${version.file}" />
+
+    <target name="release-jars" depends="release">
+        <delete dir="bin/release-jars" />
+        <mkdir dir="bin/release-jars" />
+
+        <jar destfile="bin/release-jars/robogherk-${version}.jar">
+            <fileset dir="bin/classes" />
+            <manifest>
+                <attribute name="Implementation-Vendor" value="LeanDog, Inc." />
+                <attribute name="Implementation-Title" value="RoboGherk" />
+                <attribute name="Implementation-Version" value="${version}" />
+            </manifest>
+        </jar>
+    </target>
+
     <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:
