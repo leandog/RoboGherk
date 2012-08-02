@@ -36,18 +36,10 @@
     </target>
 
     <target name="run" depends="create-local.properties">
-        <ant inheritAll="false" 
-            dir="robogherk" 
-            target="debug"/>
-        <ant inheritAll="false" 
-            dir="example_app" 
-            target="debug-install"/>
-        <ant inheritAll="false" 
-            dir="exercises" 
-            target="test"/>
-        <ant inheritAll="false" 
-            dir="unit" 
-            target="test"/>
+        <ant dir="robogherk" target="debug"/>
+        <ant dir="example_app" target="debug-install"/>
+        <ant dir="exercises" target="test"/>
+        <ant dir="unit" target="test"/>
     </target>
 
     <target name="clean">
