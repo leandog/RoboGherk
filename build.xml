@@ -34,6 +34,7 @@
             <arg value="-p"/>
             <arg value="${project.dir}"/>
         </exec>
+        <delete file="${project.dir}/proguard-project.txt" />
     </target>
 
     <target name="build" depends="create-local.properties">
