@@ -1,0 +1,18 @@
+<project name="robogherk" default="run" basedir=".">
+
+    <target name="run">
+        <ant inheritAll="false" 
+            dir="robogherk" 
+            target="debug"/>
+        <ant inheritAll="false" 
+            dir="example_app" 
+            target="debug-install"/>
+        <ant inheritAll="false" 
+            dir="exercises" 
+            target="test"/>
+        <ant inheritAll="false" 
+            dir="unit" 
+            target="test"/>
+    </target>
+
+</project>
