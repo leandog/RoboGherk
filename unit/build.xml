@@ -14,13 +14,16 @@
         <pathelement location="${exercises.dir}"/>
     </path>
 
-    <target name="test">
+    <target name="compile-test">
         <mkdir dir="${output.dir}"/>
 
         <javac srcdir="${java_source.dir}" 
             destdir="${output.dir}" >
             <classpath refid="classpath"/> 
         </javac>
+    </target>
+
+    <target name="test" depends="compile-test">
 
         <junit haltonerror="yes"
             haltonfailure="true">
