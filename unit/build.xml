@@ -9,12 +9,28 @@
         <javac srcdir="${java_source.dir}" 
             destdir="${output.dir}" >
             <classpath>
-                <pathelement location="${robogherk.dir}"/>
                 <fileset dir="libs"/>
                 <fileset dir="../robogherk/libs"/>
+                <pathelement location="${robogherk.dir}"/>
                 <pathelement location="${exercises.dir}"/>
             </classpath>
         </javac>
+        <junit haltonerror="yes"
+            haltonfailure="true">
+            <formatter type="plain" usefile="no" />
+            <classpath>
+                <fileset includes="mockito*.*" dir="libs"/>
+                <fileset includes="junit*.*" dir="libs"/>
+                <pathelement location="${robogherk.dir}"/>
+                <fileset dir="../robogherk/libs"/>
+                <pathelement location="${output.dir}"/>
+                <fileset includes="android*.*" dir="libs"/>
+                <pathelement location="${exercises.dir}"/>
+            </classpath>
+            <batchtest>
+                <fileset dir="${java_source.dir}" includes="**/*Test.java"/>
+            </batchtest>
+        </junit>
     </target>
 
     <target name="clean">
