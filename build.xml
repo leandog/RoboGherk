@@ -1,4 +1,4 @@
-<project name="robogherk" default="build" basedir=".">
+<project name="robogherk" default="stage-artifacts" basedir=".">
 
     <!-- Generating */local.properties -->
 
@@ -46,10 +46,12 @@
         <ant dir="example_app" target="debug-install"/>
         <ant dir="exercises" target="test"/>
         <ant dir="unit" target="test"/>
-
-        <delete dir="target" />
-        <mkdir dir="target" />
-        <copy todir="target">
+    </target>
+    
+    <target name="stage-artifacts" depends="build">
+        <delete dir="artifacts" />
+        <mkdir dir="artifacts" />
+        <copy todir="artifacts">
             <fileset dir="robogherk/bin/release-jars" />
         </copy>
     </target>
