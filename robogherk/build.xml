@@ -19,7 +19,7 @@
     <tempfile property="version.file" />
     <exec executable="/bin/sh">
         <arg value="-c" />
-        <arg value="git describe | sed -e 's/^v/version=/' &gt; ${version.file}" />
+        <arg value="git describe --match 'v*' | sed -e 's/^v/version=/' &gt; ${version.file}" />
     </exec>
     <loadproperties srcFile="${version.file}" />
     <delete file="${version.file}" />
