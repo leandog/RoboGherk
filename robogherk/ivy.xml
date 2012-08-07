@@ -3,6 +3,5 @@
        xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info
         organisation="com.leandog"
-        module="robogherk">
-    </info>
+        module="robogherk"/>
 </ivy-module>
