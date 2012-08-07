@@ -25,10 +25,10 @@
     <delete file="${version.file}" />
 
     <target name="release-jars" depends="release">
-        <delete dir="bin/release-jars" />
-        <mkdir dir="bin/release-jars" />
+        <delete dir="bin/artifacts" />
+        <mkdir dir="bin/artifacts" />
 
-        <jar destfile="bin/release-jars/robogherk-${version}.jar">
+        <jar destfile="bin/artifacts/robogherk-${version}.jar">
             <fileset dir="bin/classes" />
             <manifest>
                 <attribute name="Implementation-Vendor" value="LeanDog, Inc." />
@@ -36,6 +36,9 @@
                 <attribute name="Implementation-Version" value="${version}" />
             </manifest>
         </jar>
+
+        <copy file="ivy.xml" tofile="bin/artifacts/ivy-${version}.xml"/>
+
     </target>
 
     <!--

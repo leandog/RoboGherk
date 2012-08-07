@@ -52,7 +52,7 @@
         <delete dir="artifacts" />
         <mkdir dir="artifacts" />
         <copy todir="artifacts">
-            <fileset dir="robogherk/bin/release-jars" />
+            <fileset dir="robogherk/bin/artifacts" />
         </copy>
     </target>
 
