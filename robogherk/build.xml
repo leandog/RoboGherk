@@ -37,7 +37,9 @@
             </manifest>
         </jar>
 
-        <copy file="ivy.xml" tofile="bin/artifacts/ivy-${version}.xml"/>
+        <exec executable="./add_version_to_ivy_file.rb">
+          <arg value="${version}"/>
+        </exec>
 
     </target>
 
