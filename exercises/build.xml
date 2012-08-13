@@ -14,6 +14,8 @@
             unless="sdk.dir"
     />
 
+    <import file="../ivy-targets.xml" />
+
     <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:

@@ -42,6 +42,7 @@
     <!-- The usual targets -->
 
     <target name="build" depends="create-local.properties">
+	<ant dir="robogherk" target="resolve"/>
         <ant dir="robogherk" target="release-jars"/>
         <ant dir="example_app" target="debug-install"/>
         <ant dir="exercises" target="test"/>
