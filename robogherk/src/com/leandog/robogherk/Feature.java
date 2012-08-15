@@ -1,14 +1,11 @@
 package com.leandog.robogherk;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.test.ActivityInstrumentationTestCase2;
 
 public abstract class Feature extends ActivityInstrumentationTestCase2<Activity> {
 
     private ScenarioEnvironment environment;
-
-    private boolean screenIsLocked = true;
 
     @SuppressWarnings("unchecked")
     public Feature(Class<? extends Activity> activityClass) {
@@ -50,13 +47,5 @@ public abstract class Feature extends ActivityInstrumentationTestCase2<Activity>
 
     private void prepareToExecute() {
         getActivity();
-        if (screenIsLocked)
-            unlockScreen();
-    }
-
-    private void unlockScreen() {
-        KeyguardManager manager = (KeyguardManager) getActivity().getSystemService(Activity.KEYGUARD_SERVICE);
-        manager.newKeyguardLock(getActivity().getClass().getName()).disableKeyguard();
-        screenIsLocked = false;
     }
 }
