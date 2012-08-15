@@ -36,14 +36,7 @@
                 <attribute name="Implementation-Version" value="${version}" />
             </manifest>
         </jar>
-
-        <exec executable="./add_version_to_ivy_file.rb">
-          <arg value="${version}"/>
-        </exec>
-
     </target>
-
-    <import file="../ivy-targets.xml" />
 
     <!--
         Import per project custom build rules if present at the root of the project.

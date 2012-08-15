@@ -5,6 +5,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/RoboGherk_example_app"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=RoboGherk_exercises&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;acceptedTypes=jar%2Cbundle%2Cejb%2Cmaven-plugin&amp;alphaOrder=false&amp;resolveInWorkspace=false&amp;retrievedClasspath=true&amp;retrievedClasspathPattern=libs%2Fivy-%5Btype%5D-%5Bartifact%5D-%5Brevision%5D.%5Bext%5D&amp;retrievedClasspathSync=true&amp;retrievedClasspathTypes=*"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
