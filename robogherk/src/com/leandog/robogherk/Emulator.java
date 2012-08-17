@@ -124,7 +124,8 @@ public class Emulator {
         typeIntoField(witnessPhoneInput, phoneNumber);
     }
     
-    public void unlockScreen() {
+    @SuppressWarnings("deprecation")
+	public void unlockScreen() {
         KeyguardManager manager = (KeyguardManager) solo.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
         manager.newKeyguardLock(solo.getCurrentActivity().getClass().getName()).disableKeyguard();
     }
