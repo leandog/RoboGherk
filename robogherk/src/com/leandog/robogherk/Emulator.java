@@ -22,9 +22,9 @@ public class Emulator {
         this.solo = solo;
     }
 
-    public void clickToNavigate(String textToClick, Class<? extends Activity> activityToNavigateTo) {
+    public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
         click(textToClick);
-        waitFor(activityToNavigateTo);
+        waitFor(activityToWaitFor);
     }
 
     public void click(final String textToClick) {
