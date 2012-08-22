@@ -11,14 +11,14 @@ import android.widget.EditText;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class Emulator {
+public class Device {
 
     private static final int MAX_TRIES = 5;
     private static final int TIME_TO_WAIT = 125000;
 
     private Solo solo;
 
-    public Emulator(Solo solo) {
+    public Device(Solo solo) {
         this.solo = solo;
     }
 
