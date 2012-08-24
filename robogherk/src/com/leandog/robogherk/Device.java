@@ -8,6 +8,7 @@ import android.app.KeyguardManager;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -136,6 +137,12 @@ public class Device {
     public void updateEditTextField(int editTextId, String text) {
         solo.clearEditText((EditText) solo.getView(editTextId));
         typeIntoField(editTextId, text);
+    }
+    
+    public String getTextFromTextView(int textViewId) {
+       View view = solo.getView(textViewId);
+       assertTrue("The view requested is not a TextView!",view instanceof TextView);
+       return ((TextView)view).getText().toString(); 
     }
 
     @SuppressWarnings("deprecation")
