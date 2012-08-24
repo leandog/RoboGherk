@@ -44,6 +44,10 @@ public class Device {
     public void scrollToBottom() {
         while(solo.scrollDown());
     }
+    
+    public void goBack() {
+        solo.goBack();
+    }
 
     public boolean isOn(Class<? extends Activity> activity) {
         return solo.getCurrentActivity().getClass().getName().equals(activity.getName());
