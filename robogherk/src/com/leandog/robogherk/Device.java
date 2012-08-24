@@ -36,6 +36,14 @@ public class Device {
 
         solo.clickOnText(textToClick);
     }
+    
+    public void scrollToTop() {
+        while(solo.scrollUp());
+    }
+    
+    public void scrollToBottom() {
+        while(solo.scrollDown());
+    }
 
     public boolean isOn(Class<? extends Activity> activity) {
         return solo.getCurrentActivity().getClass().getName().equals(activity.getName());
@@ -91,7 +99,7 @@ public class Device {
 
     public void assertTextIsVisible(final String... oneOrMoreTexts) {
         for (String text : oneOrMoreTexts){
-            waitFor(text);
+            solo.searchText(text);
         }
     }
 
@@ -112,7 +120,7 @@ public class Device {
     }
 
     public void clickOnViewWithId(int id) {
-        View view = solo.getCurrentActivity().findViewById(id);
+        View view = solo.getView(id);
         assertNotNull("view not found!", view);
         solo.clickOnView(view);
     }
