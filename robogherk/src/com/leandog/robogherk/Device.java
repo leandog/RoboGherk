@@ -74,11 +74,8 @@ public class Device {
     }
     
     public void waitFor(final String text) {
-        tryToDo(new It() {
-            public boolean shouldBeDone() {
-                return solo.waitForText(text, 1, TIME_TO_WAIT);
-            }
-        }, "failed to find text '" + text + "'");
+        final String failureMessage = "failed to find text '" + text + "'";
+		assertTrue(failureMessage, solo.waitForText(text, 1, TIME_TO_WAIT));
     }
 
     public void waitForDialogToClose() {
