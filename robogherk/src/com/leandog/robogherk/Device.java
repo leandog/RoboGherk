@@ -36,10 +36,10 @@ public class Device {
 
         solo.clickOnText(textToClick);
     }
-    
-	public boolean isOn(Class<? extends Activity> activity) {
-		return solo.getCurrentActivity().getClass().getName().equals(activity.getName());
-	}
+
+    public boolean isOn(Class<? extends Activity> activity) {
+        return solo.getCurrentActivity().getClass().getName().equals(activity.getName());
+    }
 
     public void waitFor(final Class<? extends Activity> activityClass) {
         tryToDo(new It() {
@@ -54,7 +54,7 @@ public class Device {
         long endTime = SystemClock.currentThreadTimeMillis() + 5000;
         while (endTime > SystemClock.currentThreadTimeMillis()) {
             if (!isOn(activity))
-            	return;
+                return;
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -89,8 +89,10 @@ public class Device {
         solo.enterText((EditText) view, text);
     }
 
-    public void assertTextIsVisible(final String text) {
-        waitFor(text);
+    public void assertTextIsVisible(final String... oneOrMoreTexts) {
+        for (String text : oneOrMoreTexts){
+            waitFor(text);
+        }
     }
 
     public void viewWithIdIsVisible(int id) {
@@ -119,13 +121,13 @@ public class Device {
         solo.setActivityOrientation(Solo.LANDSCAPE);
     }
 
-    public void updateEditTextField(int witnessPhoneInput, String phoneNumber) {
-        solo.clearEditText((EditText) solo.getView(witnessPhoneInput));
-        typeIntoField(witnessPhoneInput, phoneNumber);
+    public void updateEditTextField(int editTextId, String text) {
+        solo.clearEditText((EditText) solo.getView(editTextId));
+        typeIntoField(editTextId, text);
     }
-    
+
     @SuppressWarnings("deprecation")
-	public void unlockScreen() {
+    public void unlockScreen() {
         KeyguardManager manager = (KeyguardManager) solo.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
         manager.newKeyguardLock(solo.getCurrentActivity().getClass().getName()).disableKeyguard();
     }
