@@ -29,12 +29,7 @@ public class Device {
     }
 
     public void click(final String textToClick) {
-        tryToDo(new It() {
-            public boolean shouldBeDone() {
-                return solo.waitForText(textToClick, 1, TIME_TO_WAIT);
-            }
-        }, "failed while waiting for '" + textToClick + "'");
-
+        assertTrue("failed waiting for '" + textToClick + "'", solo.waitForText(textToClick, 1, TIME_TO_WAIT));
         solo.clickOnText(textToClick);
     }
     
@@ -77,7 +72,7 @@ public class Device {
 
         fail("timed out waiting to leave " + activity.getSimpleName());
     }
-
+    
     public void waitFor(final String text) {
         tryToDo(new It() {
             public boolean shouldBeDone() {
