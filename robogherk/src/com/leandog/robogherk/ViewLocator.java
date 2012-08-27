@@ -1,7 +1,5 @@
 package com.leandog.robogherk;
 
-import java.util.regex.Pattern;
-
 import com.jayway.android.robotium.solo.Solo;
 
 import android.view.View;
@@ -15,7 +13,7 @@ public class ViewLocator {
 		this.androidDriver = androidDriver;
 	}
 
-	public View find(Pattern regex) {
+	public View find(String regex) {
 		for (View view : androidDriver.getCurrentViews()) {
 			if (viewMatchesPattern(regex, view))
 				return view;
@@ -23,10 +21,10 @@ public class ViewLocator {
 		return null;
 	}
 
-	private boolean viewMatchesPattern(Pattern regex, View view) {
+	private boolean viewMatchesPattern(String regex, View view) {
 		if (view instanceof TextView) {
 			String viewText = ((TextView) view).getText().toString();
-			return regex.matcher(viewText).matches();
+			return viewText.matches(regex);
 		}
 		return false;
 	}

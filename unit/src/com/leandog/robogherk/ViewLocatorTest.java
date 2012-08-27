@@ -41,7 +41,7 @@ public class ViewLocatorTest {
 	@Test
 	public void doesNotThrowIfAllWeHaveIsAViewThatIsNotATextView() {
 		views.add(mock(ImageView.class));
-		viewLocator.find(Pattern.compile(".*")); 
+		viewLocator.find(".*"); 
 	}
 
 	private void givenATextViewWithText(String text) {
@@ -51,13 +51,13 @@ public class ViewLocatorTest {
 	}
 
 	private void assertFindsAViewLike(String regex) {
-		View view = viewLocator.find(Pattern.compile(regex));
+		View view = viewLocator.find(regex);
 		final String failureMessage = "Nope. Ccould not find view like "+ regex;
 		assertNotNull(failureMessage, view);
 	}
 	
 	private void assertDoesNotFindAViewLike(String regex) {
-		View view = viewLocator.find(Pattern.compile(regex));
+		View view = viewLocator.find(regex);
 		final String failureMessage = "Uh oh! Found a view like "+ regex;
 		assertNull(failureMessage, view);
 	}
