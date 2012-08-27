@@ -12,6 +12,7 @@ import com.jayway.android.robotium.solo.Solo;
 import static org.junit.Assert.*;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewLocatorTest {
@@ -35,6 +36,12 @@ public class ViewLocatorTest {
 	public void findReturnsNullWhenNoViewsMatch() {
 		givenATextViewWithText("any arbitrary text");
 		assertDoesNotFindAViewLike("flarp!");
+	}
+	
+	@Test
+	public void doesNotThrowIfAllWeHaveIsAViewThatIsNotATextView() {
+		views.add(mock(ImageView.class));
+		viewLocator.find(Pattern.compile(".*")); 
 	}
 
 	private void givenATextViewWithText(String text) {

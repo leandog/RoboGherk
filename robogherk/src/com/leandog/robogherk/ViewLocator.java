@@ -24,8 +24,10 @@ public class ViewLocator {
 	}
 
 	private boolean viewMatchesPattern(Pattern regex, View view) {
-		String viewText = ((TextView) view).getText().toString();
-		return regex.matcher(viewText).matches();
+		if (view instanceof TextView) {
+			String viewText = ((TextView) view).getText().toString();
+			return regex.matcher(viewText).matches();
+		}
+		return false;
 	}
-
 }
