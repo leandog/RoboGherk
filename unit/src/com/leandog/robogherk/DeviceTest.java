@@ -15,14 +15,12 @@ public class DeviceTest {
 	
 	@Test
 	public void clickFindsTheView() {
-		when(solo.waitForText(anyString(), anyInt(), anyLong())).thenReturn(true);
 		device.click("hello.*world");
 		verify(viewLocator).find("hello.*world");
 	}
 	
 	@Test
 	public void clickClicksTheFoundView() {
-		when(solo.waitForText(anyString(), anyInt(), anyLong())).thenReturn(true);
 		View view = mock(View.class);
 		when(viewLocator.find(anyString())).thenReturn(view);
 		device.click("someRegex");
