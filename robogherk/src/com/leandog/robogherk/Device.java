@@ -17,10 +17,16 @@ public class Device {
     private static final int MAX_TRIES = 5;
     private static final int TIME_TO_WAIT = 125000;
 
-    private Solo solo;
-
+    private final Solo solo;
+    private final ViewLocator viewLocator;
+    
     public Device(Solo solo) {
+    	this(solo, new ViewLocator(solo));
+    }
+
+    public Device(Solo solo, ViewLocator viewLocator) {
         this.solo = solo;
+        this.viewLocator = viewLocator;
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
@@ -28,11 +34,13 @@ public class Device {
         waitFor(activityToWaitFor);
     }
 
-    public void click(final String textToClick) {
-        String failureMessage = "failed waiting for '" + textToClick + "'";
+    public void click(final String regex) {
+    	viewLocator.find(regex);
+    	
+        String failureMessage = "failed waiting for '" + regex + "'";
          
-		assertTrue(failureMessage, solo.waitForText(textToClick, 1, TIME_TO_WAIT));
-        solo.clickOnText(textToClick);
+		assertTrue(failureMessage, solo.waitForText(regex, 1, TIME_TO_WAIT));
+        solo.clickOnText(regex);
     }
     
     public void scrollToTop() {

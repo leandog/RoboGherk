@@ -1,19 +1,20 @@
 package com.leandog.robogherk;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-
-import com.jayway.android.robotium.solo.Solo;
-
-import static org.junit.Assert.*;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class ViewLocatorTest {
 	
