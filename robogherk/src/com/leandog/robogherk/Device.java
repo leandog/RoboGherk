@@ -94,6 +94,7 @@ public class Device {
     }
 
     public void typeIntoField(int id, String text) {
+        solo.clearEditText((EditText) solo.getView(id));
         final View view = solo.getView(id);
         assertNotNull("view with id " + id + " not found", view);
         assertTrue("view with id " + id + " is not an EditText (it's a " + view.getClass() + ")", EditText.class
@@ -134,7 +135,6 @@ public class Device {
     }
 
     public void updateEditTextField(int editTextId, String text) {
-        solo.clearEditText((EditText) solo.getView(editTextId));
         typeIntoField(editTextId, text);
     }
     

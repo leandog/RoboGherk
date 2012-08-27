@@ -3,6 +3,7 @@ package com.leandog.robogherk;
 import static org.junit.Assert.*;
 import junit.framework.AssertionFailedError;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -13,21 +14,23 @@ import com.jayway.android.robotium.solo.Solo;
 public class DeviceTest {
 	
 	private Solo solo = mock(Solo.class);
+	private View view = mock(View.class);
 	private ViewFinder viewFinder = mock(ViewFinder.class);
 	private Device device = new Device(solo, viewFinder);
 	
+	@Before
+	public void setUp() {
+		when(viewFinder.find(anyString())).thenReturn(view);
+	}
+	
 	@Test
 	public void clickFindsTheView() {
-		View view = mock(View.class);
-		when(viewFinder.find(anyString())).thenReturn(view);
 		device.click("hello.*world");
 		verify(viewFinder).find("hello.*world");
 	}
 	
 	@Test
 	public void clickClicksTheFoundView() {
-		View view = mock(View.class);
-		when(viewFinder.find(anyString())).thenReturn(view);
 		device.click("someRegex");
 		verify(solo).clickOnView(view);
 	}
