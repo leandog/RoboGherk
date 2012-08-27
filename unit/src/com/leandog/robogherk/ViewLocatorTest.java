@@ -30,6 +30,12 @@ public class ViewLocatorTest {
 		givenATextViewWithText("any arbitrary text");
 		assertFindsAViewLike(".*");
 	}
+	
+	@Test
+	public void findReturnsNullWhenNoViewsMatch() {
+		givenATextViewWithText("any arbitrary text");
+		assertDoesNotFindAViewLike("flarp!");
+	}
 
 	private void givenATextViewWithText(String text) {
 		TextView textView  = mock(TextView.class);
@@ -39,8 +45,14 @@ public class ViewLocatorTest {
 
 	private void assertFindsAViewLike(String regex) {
 		View view = viewLocator.find(Pattern.compile(regex));
-		final String failureMessage = "could not find view like "+ regex;
+		final String failureMessage = "Nope. Ccould not find view like "+ regex;
 		assertNotNull(failureMessage, view);
+	}
+	
+	private void assertDoesNotFindAViewLike(String regex) {
+		View view = viewLocator.find(Pattern.compile(regex));
+		final String failureMessage = "Uh oh! Found a view like "+ regex;
+		assertNull(failureMessage, view);
 	}
 }
 

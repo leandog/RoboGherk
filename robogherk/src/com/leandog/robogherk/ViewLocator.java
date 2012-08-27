@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import com.jayway.android.robotium.solo.Solo;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class ViewLocator {
 
@@ -14,8 +15,13 @@ public class ViewLocator {
 		this.androidDriver = androidDriver;
 	}
 
-	public View find(Pattern compile) {
-		return androidDriver.getCurrentViews().get(0);
+	public View find(Pattern regex) {
+		for (View view : androidDriver.getCurrentViews()) {
+			String viewText = ((TextView) view).getText().toString();
+			if (regex.matcher(viewText).matches())
+				return view;
+		}
+		return null;
 	}
 
 }
