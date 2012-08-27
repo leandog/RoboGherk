@@ -10,19 +10,19 @@ import com.jayway.android.robotium.solo.Solo;
 public class DeviceTest {
 	
 	private Solo solo = mock(Solo.class);
-	private ViewFinder viewLocator = mock(ViewFinder.class);
-	private Device device = new Device(solo, viewLocator);
+	private ViewFinder viewFinder = mock(ViewFinder.class);
+	private Device device = new Device(solo, viewFinder);
 	
 	@Test
 	public void clickFindsTheView() {
 		device.click("hello.*world");
-		verify(viewLocator).find("hello.*world");
+		verify(viewFinder).find("hello.*world");
 	}
 	
 	@Test
 	public void clickClicksTheFoundView() {
 		View view = mock(View.class);
-		when(viewLocator.find(anyString())).thenReturn(view);
+		when(viewFinder.find(anyString())).thenReturn(view);
 		device.click("someRegex");
 		verify(solo).clickOnView(view);
 	}
