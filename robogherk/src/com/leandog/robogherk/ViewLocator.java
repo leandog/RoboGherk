@@ -17,11 +17,15 @@ public class ViewLocator {
 
 	public View find(Pattern regex) {
 		for (View view : androidDriver.getCurrentViews()) {
-			String viewText = ((TextView) view).getText().toString();
-			if (regex.matcher(viewText).matches())
+			if (viewMatchesPattern(regex, view))
 				return view;
 		}
 		return null;
+	}
+
+	private boolean viewMatchesPattern(Pattern regex, View view) {
+		String viewText = ((TextView) view).getText().toString();
+		return regex.matcher(viewText).matches();
 	}
 
 }
