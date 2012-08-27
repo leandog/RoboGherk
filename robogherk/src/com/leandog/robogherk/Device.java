@@ -35,7 +35,9 @@ public class Device {
     }
 
     public void click(final String regex) {
-        solo.clickOnView(viewFinder.find(regex));
+        View view = viewFinder.find(regex);
+		assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
+		solo.clickOnView(view);
     }
     
     public void scrollToTop() {

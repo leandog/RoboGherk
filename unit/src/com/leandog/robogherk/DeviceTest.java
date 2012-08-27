@@ -1,5 +1,8 @@
 package com.leandog.robogherk;
 
+import static org.junit.Assert.*;
+import junit.framework.AssertionFailedError;
+
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -15,6 +18,8 @@ public class DeviceTest {
 	
 	@Test
 	public void clickFindsTheView() {
+		View view = mock(View.class);
+		when(viewFinder.find(anyString())).thenReturn(view);
 		device.click("hello.*world");
 		verify(viewFinder).find("hello.*world");
 	}
@@ -25,5 +30,17 @@ public class DeviceTest {
 		when(viewFinder.find(anyString())).thenReturn(view);
 		device.click("someRegex");
 		verify(solo).clickOnView(view);
+	}
+	
+	@Test
+	public void clickGivesUsAPrettyErrorWhenItCannotFindTheView() {
+		when(viewFinder.find(anyString())).thenReturn(null);
+		
+		try {
+			device.click("an arbitrary regex");
+			fail("wha?! click() should have thrown a JUnit assertion");
+		} catch (AssertionFailedError e) {
+			assertEquals("Could not find a clickable view matching 'an arbitrary regex'", e.getMessage());
+		}
 	}
 }
