@@ -18,17 +18,20 @@ public class ViewLocatorTest {
 	private Solo androidDriver = mock(Solo.class);
 
 	@Test
-	public void findsAMatchingTextViewUsingARegex() {
+	public void findsATextViewWhenGivenARegexWhichMatchesAnything() {
 		ArrayList<View> mockViews = new ArrayList<View>();
-		TextView textView = mock(TextView.class);
-		when(textView.getText()).thenReturn("hello, world");
+		TextView textView  = mock(TextView.class);
+		when(textView.getText()).thenReturn("howdy, partner!");
 		mockViews.add(textView);
 		when(androidDriver.getCurrentViews()).thenReturn(mockViews);
 		
 		ViewLocator viewLocator = new ViewLocator(androidDriver);
-		String regex = "hello.*world";
+		String regex = ".*";
 		View view = viewLocator.find(Pattern.compile(regex));
 		final String failureMessage = "could not find view like "+ regex;
 		assertNotNull(failureMessage, view);
 	}
+	
 }
+
+
