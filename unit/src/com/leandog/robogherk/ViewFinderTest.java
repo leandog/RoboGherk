@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class ViewLocatorTest {
+public class ViewFinderTest {
 	
 	private Solo androidDriver = mock(Solo.class);
-	private ViewLocator viewLocator = new ViewLocator(androidDriver);
+	private ViewFinder viewFinder = new ViewFinder(androidDriver);
 	private ArrayList<View> views = new ArrayList<View>();
 	
 	@Before
@@ -42,7 +42,7 @@ public class ViewLocatorTest {
 	@Test
 	public void doesNotThrowIfAllWeHaveIsAViewThatIsNotATextView() {
 		views.add(mock(ImageView.class));
-		viewLocator.find(".*"); 
+		viewFinder.find(".*"); 
 	}
 
 	private void givenATextViewWithText(String text) {
@@ -52,13 +52,13 @@ public class ViewLocatorTest {
 	}
 
 	private void assertFindsAViewLike(String regex) {
-		View view = viewLocator.find(regex);
+		View view = viewFinder.find(regex);
 		final String failureMessage = "Nope. Ccould not find view like "+ regex;
 		assertNotNull(failureMessage, view);
 	}
 	
 	private void assertDoesNotFindAViewLike(String regex) {
-		View view = viewLocator.find(regex);
+		View view = viewFinder.find(regex);
 		final String failureMessage = "Uh oh! Found a view like "+ regex;
 		assertNull(failureMessage, view);
 	}

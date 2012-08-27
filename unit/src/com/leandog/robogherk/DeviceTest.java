@@ -8,7 +8,7 @@ import com.jayway.android.robotium.solo.Solo;
 public class DeviceTest {
 	
 	private Solo solo = mock(Solo.class);
-	private ViewLocator viewLocator = mock(ViewLocator.class);
+	private ViewFinder viewLocator = mock(ViewFinder.class);
 	private Device device = new Device(solo, viewLocator);
 	
 	@Test

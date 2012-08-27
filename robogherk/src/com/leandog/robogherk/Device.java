@@ -18,15 +18,15 @@ public class Device {
     private static final int TIME_TO_WAIT = 125000;
 
     private final Solo solo;
-    private final ViewLocator viewLocator;
+    private final ViewFinder viewFinder;
     
     public Device(Solo solo) {
-    	this(solo, new ViewLocator(solo));
+    	this(solo, new ViewFinder(solo));
     }
 
-    public Device(Solo solo, ViewLocator viewLocator) {
+    public Device(Solo solo, ViewFinder viewLocator) {
         this.solo = solo;
-        this.viewLocator = viewLocator;
+        this.viewFinder = viewLocator;
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
@@ -35,7 +35,7 @@ public class Device {
     }
 
     public void click(final String regex) {
-    	viewLocator.find(regex);
+    	viewFinder.find(regex);
     	
         String failureMessage = "failed waiting for '" + regex + "'";
          
