@@ -29,7 +29,9 @@ public class Device {
     }
 
     public void click(final String textToClick) {
-        assertTrue("failed waiting for '" + textToClick + "'", solo.waitForText(textToClick, 1, TIME_TO_WAIT));
+        String failureMessage = "failed waiting for '" + textToClick + "'";
+         
+		assertTrue(failureMessage, solo.waitForText(textToClick, 1, TIME_TO_WAIT));
         solo.clickOnText(textToClick);
     }
     
