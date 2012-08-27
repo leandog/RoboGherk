@@ -35,12 +35,9 @@ public class Device {
     }
 
     public void click(final String regex) {
-    	viewFinder.find(regex);
-    	
-        String failureMessage = "failed waiting for '" + regex + "'";
-         
+    	String failureMessage = "failed waiting for '" + regex + "'";
 		assertTrue(failureMessage, solo.waitForText(regex, 1, TIME_TO_WAIT));
-        solo.clickOnText(regex);
+        solo.clickOnView(viewFinder.find(regex));
     }
     
     public void scrollToTop() {
