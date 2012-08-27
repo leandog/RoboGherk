@@ -3,6 +3,7 @@ package com.leandog.robogherk;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -16,22 +17,31 @@ import android.widget.TextView;
 public class ViewLocatorTest {
 	
 	private Solo androidDriver = mock(Solo.class);
+	private ViewLocator viewLocator = new ViewLocator(androidDriver);
+	private ArrayList<View> views = new ArrayList<View>();
+	
+	@Before
+	public void setUp() {
+		when(androidDriver.getCurrentViews()).thenReturn(views);
+	}
 
 	@Test
 	public void findsATextViewWhenGivenARegexWhichMatchesAnything() {
-		ArrayList<View> mockViews = new ArrayList<View>();
+		givenATextViewWithText("any arbitrary text");
+		assertFindsAViewLike(".*");
+	}
+
+	private void givenATextViewWithText(String text) {
 		TextView textView  = mock(TextView.class);
-		when(textView.getText()).thenReturn("howdy, partner!");
-		mockViews.add(textView);
-		when(androidDriver.getCurrentViews()).thenReturn(mockViews);
-		
-		ViewLocator viewLocator = new ViewLocator(androidDriver);
-		String regex = ".*";
+		when(textView.getText()).thenReturn(text);
+		views.add(textView);
+	}
+
+	private void assertFindsAViewLike(String regex) {
 		View view = viewLocator.find(Pattern.compile(regex));
 		final String failureMessage = "could not find view like "+ regex;
 		assertNotNull(failureMessage, view);
 	}
-	
 }
 
 
