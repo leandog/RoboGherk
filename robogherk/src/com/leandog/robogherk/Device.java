@@ -29,8 +29,8 @@ public class Device {
         this.viewSeeker = viewSeeker;
     }
 
-    public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
-        click(textToClick);
+    public void clickAndWaitFor(String regex, Class<? extends Activity> activityToWaitFor) {
+        click(regex);
         waitFor(activityToWaitFor);
     }
 
