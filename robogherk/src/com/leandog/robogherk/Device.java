@@ -21,12 +21,12 @@ public class Device {
     private final ViewSeeker viewSeeker;
     
     public Device(Solo androidDriver) {
-    	this(androidDriver, new ViewDetector(androidDriver));
+    	this(androidDriver, new ViewSeeker(new ViewDetector(androidDriver)));
     }
 
-    public Device(Solo androidDriver, ViewDetector viewDetector) {
+    public Device(Solo androidDriver, ViewSeeker viewSeeker) {
         this.androidDriver = androidDriver;
-        this.viewSeeker = new ViewSeeker(viewDetector);
+        this.viewSeeker = viewSeeker;
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
