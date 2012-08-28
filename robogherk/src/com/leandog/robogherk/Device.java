@@ -17,15 +17,15 @@ public class Device {
     private static final int MAX_TRIES = 5;
     private static final int TIME_TO_WAIT = 125000;
 
-    private final Solo solo;
+    private final Solo androidDriver;
     private final ViewFinder viewFinder;
     
-    public Device(Solo solo) {
-    	this(solo, new ViewFinder(solo));
+    public Device(Solo androidDriver) {
+    	this(androidDriver, new ViewFinder(androidDriver));
     }
 
-    public Device(Solo solo, ViewFinder viewLocator) {
-        this.solo = solo;
+    public Device(Solo androidDriver, ViewFinder viewLocator) {
+        this.androidDriver = androidDriver;
         this.viewFinder = viewLocator;
     }
 
@@ -35,33 +35,39 @@ public class Device {
     }
 
     public void click(final String regex) {
-        View view = viewFinder.find(regex);
-		assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
-		solo.clickOnView(view);
+        View view = null;
+        for (int i = 0; i < 1000; i++) {
+            view = viewFinder.find(regex);
+            if (view != null)
+                break;
+        }
+
+        assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
+		androidDriver.clickOnView(view);
     }
     
     public void scrollToTop() {
-        while(solo.scrollUp());
+        while(androidDriver.scrollUp());
     }
     
     public void scrollToBottom() {
-        while(solo.scrollDown());
+        while(androidDriver.scrollDown());
     }
     
     public void goBack() {
-        solo.goBack();
+        androidDriver.goBack();
     }
 
     public boolean isOn(Class<? extends Activity> activity) {
-        return solo.getCurrentActivity().getClass().getName().equals(activity.getName());
+        return androidDriver.getCurrentActivity().getClass().getName().equals(activity.getName());
     }
 
     public void waitFor(final Class<? extends Activity> activityClass) {
         tryToDo(new It() {
             public boolean shouldBeDone() {
-                return solo.waitForActivity(activityClass.getSimpleName(), TIME_TO_WAIT);
+                return androidDriver.waitForActivity(activityClass.getSimpleName(), TIME_TO_WAIT);
             }
-        }, activityClass.getSimpleName() + " did not appear. \nThe activity: " + solo.getCurrentActivity()
+        }, activityClass.getSimpleName() + " did not appear. \nThe activity: " + androidDriver.getCurrentActivity()
                 .getClass().getSimpleName() + " was displayed while waiting.");
     }
 
@@ -82,34 +88,34 @@ public class Device {
     
     public void waitFor(final String text) {
         final String failureMessage = "failed to find text '" + text + "'";
-		assertTrue(failureMessage, solo.waitForText(text, 1, TIME_TO_WAIT));
+		assertTrue(failureMessage, androidDriver.waitForText(text, 1, TIME_TO_WAIT));
     }
 
     public void waitForDialogToClose() {
         tryToDo(new It() {
             public boolean shouldBeDone() {
-                return solo.waitForDialogToClose(TIME_TO_WAIT);
+                return androidDriver.waitForDialogToClose(TIME_TO_WAIT);
             }
         }, "timed out waiting for dialog to close");
     }
 
     public void typeIntoField(int id, String text) {
-        solo.clearEditText((EditText) solo.getView(id));
-        final View view = solo.getView(id);
+        androidDriver.clearEditText((EditText) androidDriver.getView(id));
+        final View view = androidDriver.getView(id);
         assertNotNull("view with id " + id + " not found", view);
         assertTrue("view with id " + id + " is not an EditText (it's a " + view.getClass() + ")", EditText.class
                 .isAssignableFrom(view.getClass()));
-        solo.enterText((EditText) view, text);
+        androidDriver.enterText((EditText) view, text);
     }
 
     public void assertTextIsVisible(final String... oneOrMoreTexts) {
         for (String text : oneOrMoreTexts){
-            solo.searchText(text);
+            androidDriver.searchText(text);
         }
     }
 
     public void viewWithIdIsVisible(int id) {
-        assertNotNull("unable to find view! ", solo.getView(id));
+        assertNotNull("unable to find view! ", androidDriver.getView(id));
     }
 
     public void tryToDo(It it, String failureMessage) {
@@ -125,13 +131,13 @@ public class Device {
     }
 
     public void clickOnViewWithId(int id) {
-        View view = solo.getView(id);
+        View view = androidDriver.getView(id);
         assertNotNull("view not found!", view);
-        solo.clickOnView(view);
+        androidDriver.clickOnView(view);
     }
 
     public void rotateToLandscape() {
-        solo.setActivityOrientation(Solo.LANDSCAPE);
+        androidDriver.setActivityOrientation(Solo.LANDSCAPE);
     }
 
     public void updateEditTextField(int editTextId, String text) {
@@ -139,14 +145,14 @@ public class Device {
     }
     
     public String getTextFromTextView(int textViewId) {
-       View view = solo.getView(textViewId);
+       View view = androidDriver.getView(textViewId);
        assertTrue("The view requested is not a TextView!",view instanceof TextView);
        return ((TextView)view).getText().toString(); 
     }
 
     @SuppressWarnings("deprecation")
     public void unlockScreen() {
-        KeyguardManager manager = (KeyguardManager) solo.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
-        manager.newKeyguardLock(solo.getCurrentActivity().getClass().getName()).disableKeyguard();
+        KeyguardManager manager = (KeyguardManager) androidDriver.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
+        manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
     }
 }

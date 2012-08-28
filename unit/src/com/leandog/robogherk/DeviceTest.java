@@ -13,10 +13,10 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class DeviceTest {
 	
-	private Solo solo = mock(Solo.class);
+	private Solo androidDriver = mock(Solo.class);
 	private View view = mock(View.class);
 	private ViewFinder viewFinder = mock(ViewFinder.class);
-	private Device device = new Device(solo, viewFinder);
+	private Device device = new Device(androidDriver, viewFinder);
 	
 	@Before
 	public void setUp() {
@@ -32,7 +32,7 @@ public class DeviceTest {
 	@Test
 	public void clickClicksTheFoundView() {
 		device.click("someRegex");
-		verify(solo).clickOnView(view);
+		verify(androidDriver).clickOnView(view);
 	}
 	
 	@Test
@@ -45,5 +45,12 @@ public class DeviceTest {
 		} catch (AssertionFailedError e) {
 			assertEquals("Could not find a clickable view matching 'an arbitrary regex'", e.getMessage());
 		}
+	}
+
+	@Test
+	public void clickWillPollForWhatWeWantUntilWeFindIt() {
+		when(viewFinder.find(anyString())).thenReturn(null).thenReturn(null).thenReturn(view);
+		device.click("huzzah");
+		verify(androidDriver).clickOnView(view);
 	}
 }
