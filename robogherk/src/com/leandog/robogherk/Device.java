@@ -21,7 +21,7 @@ public class Device {
     private final ViewSeeker viewSeeker;
     
     public Device(Solo androidDriver) {
-    	this(androidDriver, new ViewSeeker(new ViewDetector(androidDriver)));
+    	this(androidDriver, new ViewSeeker(new ViewDetector(androidDriver), new Sleeper()));
     }
 
     public Device(Solo androidDriver, ViewSeeker viewSeeker) {

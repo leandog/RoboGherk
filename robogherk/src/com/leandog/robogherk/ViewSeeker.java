@@ -5,9 +5,11 @@ import android.view.View;
 public class ViewSeeker {
 
     private final ViewDetector viewDetector;
+    private final Sleeper sleeper;
     
-    public ViewSeeker(ViewDetector viewDetector) {
-        this.viewDetector = viewDetector; 
+    public ViewSeeker(ViewDetector viewDetector, Sleeper sleeper) {
+        this.viewDetector = viewDetector;
+        this.sleeper = sleeper;
     }
     
     View seek(final String regex) {
@@ -16,6 +18,7 @@ public class ViewSeeker {
             view = viewDetector.find(regex);
             if (view != null)
                 break;
+            sleeper.sleep(750);
         }
         return view;
     }
