@@ -20,13 +20,13 @@ public class DeviceTest {
 	
 	@Before
 	public void setUp() {
-		when(viewSeeker.waitForView(anyString())).thenReturn(view);
+		when(viewSeeker.seek(anyString())).thenReturn(view);
 	}
 	
 	@Test
 	public void clickFindsTheView() {
 		device.click("hello.*world");
-		verify(viewSeeker).waitForView("hello.*world");
+		verify(viewSeeker).seek("hello.*world");
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class DeviceTest {
 	
 	@Test
 	public void clickGivesUsAPrettyErrorWhenItCannotFindTheView() {
-		when(viewSeeker.waitForView(anyString())).thenReturn(null);
+		when(viewSeeker.seek(anyString())).thenReturn(null);
 		
 		try {
 			device.click("an arbitrary regex");

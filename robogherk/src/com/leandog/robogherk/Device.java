@@ -35,7 +35,7 @@ public class Device {
     }
 
     public void click(final String regex) {
-        View view = viewSeeker.waitForView(regex);
+        View view = viewSeeker.seek(regex);
         assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
 		androidDriver.clickOnView(view);
     }

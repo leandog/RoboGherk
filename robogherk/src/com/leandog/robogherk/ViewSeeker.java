@@ -10,7 +10,7 @@ public class ViewSeeker {
         this.viewDetector = viewDetector; 
     }
     
-    View waitForView(final String regex) {
+    View seek(final String regex) {
         View view = null;
         for (int i = 0; i < 1000; i++) {
             view = viewDetector.find(regex);

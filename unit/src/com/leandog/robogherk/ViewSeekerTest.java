@@ -16,6 +16,6 @@ public class ViewSeekerTest {
     @Test
 	public void waitForViewWillPollForWhatWeWantUntilWeFindIt() {
 		when(viewDetector.find(anyString())).thenReturn(null).thenReturn(null).thenReturn(view);
-		assertNotNull(viewSeeker.waitForView("huzzah"));
+		assertNotNull(viewSeeker.seek("huzzah"));
 	}
 }
