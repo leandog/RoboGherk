@@ -35,17 +35,11 @@ public class Device {
     }
 
     public void click(final String regex) {
-        View view = null;
-        for (int i = 0; i < 1000; i++) {
-            view = viewFinder.find(regex);
-            if (view != null)
-                break;
-        }
-
+        View view = waitForView(regex);
         assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
 		androidDriver.clickOnView(view);
     }
-    
+
     public void scrollToTop() {
         while(androidDriver.scrollUp());
     }
@@ -154,5 +148,15 @@ public class Device {
     public void unlockScreen() {
         KeyguardManager manager = (KeyguardManager) androidDriver.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
         manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
+    }
+    
+    private View waitForView(final String regex) {
+        View view = null;
+        for (int i = 0; i < 1000; i++) {
+            view = viewFinder.find(regex);
+            if (view != null)
+                break;
+        }
+        return view;
     }
 }
