@@ -15,19 +15,18 @@ public class DeviceTest {
 	
 	private Solo androidDriver = mock(Solo.class);
 	private View view = mock(View.class);
-	private ViewDetector viewFinder = mock(ViewDetector.class);
-	private ViewSeeker viewSeeker = new ViewSeeker(viewFinder);
+	private ViewSeeker viewSeeker = mock(ViewSeeker.class);
 	private Device device = new Device(androidDriver, viewSeeker);
 	
 	@Before
 	public void setUp() {
-		when(viewFinder.find(anyString())).thenReturn(view);
+		when(viewSeeker.waitForView(anyString())).thenReturn(view);
 	}
 	
 	@Test
 	public void clickFindsTheView() {
 		device.click("hello.*world");
-		verify(viewFinder).find("hello.*world");
+		verify(viewSeeker).waitForView("hello.*world");
 	}
 	
 	@Test
@@ -38,7 +37,7 @@ public class DeviceTest {
 	
 	@Test
 	public void clickGivesUsAPrettyErrorWhenItCannotFindTheView() {
-		when(viewFinder.find(anyString())).thenReturn(null);
+		when(viewSeeker.waitForView(anyString())).thenReturn(null);
 		
 		try {
 			device.click("an arbitrary regex");
@@ -46,12 +45,5 @@ public class DeviceTest {
 		} catch (AssertionFailedError e) {
 			assertEquals("Could not find a clickable view matching 'an arbitrary regex'", e.getMessage());
 		}
-	}
-
-	@Test
-	public void clickWillPollForWhatWeWantUntilWeFindIt() {
-		when(viewFinder.find(anyString())).thenReturn(null).thenReturn(null).thenReturn(view);
-		device.click("huzzah");
-		verify(androidDriver).clickOnView(view);
 	}
 }

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class ViewFinderTest {
+public class ViewDetectorTest {
 	
 	private Solo androidDriver = mock(Solo.class);
 	private ViewDetector viewFinder = new ViewDetector(androidDriver);
