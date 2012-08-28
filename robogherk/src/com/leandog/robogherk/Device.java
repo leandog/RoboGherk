@@ -18,7 +18,6 @@ public class Device {
     private static final int TIME_TO_WAIT = 125000;
 
     private final Solo androidDriver;
-    private final ViewDetector viewDetector;
     private final ViewSeeker viewSeeker;
     
     public Device(Solo androidDriver) {
@@ -27,7 +26,6 @@ public class Device {
 
     public Device(Solo androidDriver, ViewDetector viewDetector) {
         this.androidDriver = androidDriver;
-        this.viewDetector = viewDetector;
         this.viewSeeker = new ViewSeeker(viewDetector);
     }
 
