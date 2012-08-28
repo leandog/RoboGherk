@@ -19,6 +19,7 @@ public class Device {
 
     private final Solo androidDriver;
     private final ViewFinder viewFinder;
+    private final Waiter waiter;
     
     public Device(Solo androidDriver) {
     	this(androidDriver, new ViewFinder(androidDriver));
@@ -27,6 +28,7 @@ public class Device {
     public Device(Solo androidDriver, ViewFinder viewLocator) {
         this.androidDriver = androidDriver;
         this.viewFinder = viewLocator;
+        this.waiter = new Waiter();
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
