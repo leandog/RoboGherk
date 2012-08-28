@@ -18,17 +18,17 @@ public class Device {
     private static final int TIME_TO_WAIT = 125000;
 
     private final Solo androidDriver;
-    private final ViewFinder viewFinder;
+    final ViewFinder viewFinder;
     private final Waiter waiter;
     
     public Device(Solo androidDriver) {
     	this(androidDriver, new ViewFinder(androidDriver));
     }
 
-    public Device(Solo androidDriver, ViewFinder viewLocator) {
+    public Device(Solo androidDriver, ViewFinder viewFinder) {
         this.androidDriver = androidDriver;
-        this.viewFinder = viewLocator;
-        this.waiter = new Waiter();
+        this.viewFinder = viewFinder;
+        this.waiter = new Waiter(viewFinder);
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
@@ -37,7 +37,7 @@ public class Device {
     }
 
     public void click(final String regex) {
-        View view = waitForView(regex);
+        View view = waiter.waitForView(regex);
         assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
 		androidDriver.clickOnView(view);
     }
@@ -150,15 +150,5 @@ public class Device {
     public void unlockScreen() {
         KeyguardManager manager = (KeyguardManager) androidDriver.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
         manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
-    }
-    
-    private View waitForView(final String regex) {
-        View view = null;
-        for (int i = 0; i < 1000; i++) {
-            view = viewFinder.find(regex);
-            if (view != null)
-                break;
-        }
-        return view;
     }
 }
