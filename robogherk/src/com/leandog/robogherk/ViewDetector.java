@@ -5,11 +5,11 @@ import com.jayway.android.robotium.solo.Solo;
 import android.view.View;
 import android.widget.TextView;
 
-public class ViewFinder {
+public class ViewDetector {
 
 	private final Solo androidDriver;
 
-	public ViewFinder(Solo androidDriver) {
+	public ViewDetector(Solo androidDriver) {
 		this.androidDriver = androidDriver;
 	}
 

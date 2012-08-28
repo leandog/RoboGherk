@@ -2,18 +2,18 @@ package com.leandog.robogherk;
 
 import android.view.View;
 
-public class Waiter {
+public class ViewSeeker {
 
-    private final ViewFinder viewFinder;
+    private final ViewDetector viewDetector;
     
-    public Waiter(ViewFinder viewFinder) {
-        this.viewFinder = viewFinder; 
+    public ViewSeeker(ViewDetector viewDetector) {
+        this.viewDetector = viewDetector; 
     }
     
     View waitForView(final String regex) {
         View view = null;
         for (int i = 0; i < 1000; i++) {
-            view = viewFinder.find(regex);
+            view = viewDetector.find(regex);
             if (view != null)
                 break;
         }

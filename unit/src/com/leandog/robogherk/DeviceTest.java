@@ -15,7 +15,7 @@ public class DeviceTest {
 	
 	private Solo androidDriver = mock(Solo.class);
 	private View view = mock(View.class);
-	private ViewFinder viewFinder = mock(ViewFinder.class);
+	private ViewDetector viewFinder = mock(ViewDetector.class);
 	private Device device = new Device(androidDriver, viewFinder);
 	
 	@Before

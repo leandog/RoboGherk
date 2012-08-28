@@ -18,17 +18,17 @@ public class Device {
     private static final int TIME_TO_WAIT = 125000;
 
     private final Solo androidDriver;
-    final ViewFinder viewFinder;
-    private final Waiter waiter;
+    private final ViewDetector viewDetector;
+    private final ViewSeeker viewSeeker;
     
     public Device(Solo androidDriver) {
-    	this(androidDriver, new ViewFinder(androidDriver));
+    	this(androidDriver, new ViewDetector(androidDriver));
     }
 
-    public Device(Solo androidDriver, ViewFinder viewFinder) {
+    public Device(Solo androidDriver, ViewDetector viewDetector) {
         this.androidDriver = androidDriver;
-        this.viewFinder = viewFinder;
-        this.waiter = new Waiter(viewFinder);
+        this.viewDetector = viewDetector;
+        this.viewSeeker = new ViewSeeker(viewDetector);
     }
 
     public void clickAndWaitFor(String textToClick, Class<? extends Activity> activityToWaitFor) {
@@ -37,7 +37,7 @@ public class Device {
     }
 
     public void click(final String regex) {
-        View view = waiter.waitForView(regex);
+        View view = viewSeeker.waitForView(regex);
         assertNotNull("Could not find a clickable view matching '" + regex + "'", view);
 		androidDriver.clickOnView(view);
     }
