@@ -64,6 +64,11 @@ public class Device {
         }, activityClass.getSimpleName() + " did not appear. \nThe activity: " + androidDriver.getCurrentActivity()
                 .getClass().getSimpleName() + " was displayed while waiting.");
     }
+    
+    public void waitFor(final String text) {
+        final String failureMessage = "failed to find text '" + text + "'";
+		assertTrue(failureMessage, androidDriver.waitForText(text, 1, TIME_TO_WAIT));
+    }
 
     public void waitUntilNotOn(Class<? extends Activity> activity) {
         long endTime = SystemClock.currentThreadTimeMillis() + 5000;
@@ -80,11 +85,6 @@ public class Device {
         fail("timed out waiting to leave " + activity.getSimpleName());
     }
     
-    public void waitFor(final String text) {
-        final String failureMessage = "failed to find text '" + text + "'";
-		assertTrue(failureMessage, androidDriver.waitForText(text, 1, TIME_TO_WAIT));
-    }
-
     public void waitForDialogToClose() {
         tryToDo(new It() {
             public boolean shouldBeDone() {
