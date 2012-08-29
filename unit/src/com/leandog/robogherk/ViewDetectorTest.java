@@ -51,6 +51,12 @@ public class ViewDetectorTest {
 		assertFindsAViewLike("The big dog is really big");
 	}
 	
+	@Test
+	public void ignoresSpacesOnTheEnds() {
+	    givenATextViewWithText(" Admire my leading and trailing spaces! "); 
+	    assertFindsAViewLike("Admire my leading and trailing spaces!");
+	}
+	
 	private void assertFindsAViewLike(String regex) {
 		View view = viewFinder.find(regex);
 		final String failureMessage = "Nope. Ccould not find view like "+ regex;

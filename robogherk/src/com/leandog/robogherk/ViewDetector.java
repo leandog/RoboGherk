@@ -1,9 +1,9 @@
 package com.leandog.robogherk;
 
-import com.jayway.android.robotium.solo.Solo;
-
 import android.view.View;
 import android.widget.TextView;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class ViewDetector {
 
@@ -24,12 +24,16 @@ public class ViewDetector {
 	private boolean viewHasTextMatchingPattern(String regex, View view) {
 		if (view instanceof TextView) {
 			String viewText = ((TextView) view).getText().toString();
-    	    return stripHtmlFrom(viewText).matches(regex);
+    	    return cleanUp(viewText).matches(regex);
 		}
 		return false;
 	}
 
-    private String stripHtmlFrom(String viewText) {
-        return viewText.replaceAll("<.*?>", "");
+	private String cleanUp(String text) {
+	    return stripHtmlFrom(text.trim());
+	}
+	
+	private String stripHtmlFrom(String text) {
+        return text.replaceAll("<.*?>", "");
     }
 }
