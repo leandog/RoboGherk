@@ -57,14 +57,27 @@ public class Device {
     }
 
     public void waitFor(final Class<? extends Activity> activityClass) {
-        tryToDo(new It() {
-            public boolean shouldBeDone() {
+        tryToDo(new TaskToTrySeveralTimes() {
+            public boolean isDone() {
                 return androidDriver.waitForActivity(activityClass.getSimpleName(), TIME_TO_WAIT);
             }
         }, activityClass.getSimpleName() + " did not appear. \nThe activity: " + androidDriver.getCurrentActivity()
                 .getClass().getSimpleName() + " was displayed while waiting.");
     }
     
+    public void waitForDialogToClose() {
+        String failureMessage = "timed out waiting for dialog to close";
+        assertTrue(failureMessage, androidDriver.waitForDialogToClose(TIME_TO_WAIT));
+    }
+
+    private void tryToDo(TaskToTrySeveralTimes task, String failureMessage) {
+        boolean isDone = false;
+        for (int count = 0; !isDone && count < MAX_TRIES; count++) {
+            isDone = task.isDone();
+        }
+        assertTrue(failureMessage, isDone);
+    }
+
     public void waitFor(final String text) {
         final String failureMessage = "failed to find text '" + text + "'";
 		assertTrue(failureMessage, androidDriver.waitForText(text, 1, TIME_TO_WAIT));
@@ -85,14 +98,6 @@ public class Device {
         fail("timed out waiting to leave " + activity.getSimpleName());
     }
     
-    public void waitForDialogToClose() {
-        tryToDo(new It() {
-            public boolean shouldBeDone() {
-                return androidDriver.waitForDialogToClose(TIME_TO_WAIT);
-            }
-        }, "timed out waiting for dialog to close");
-    }
-
     public void typeIntoField(int id, String text) {
         androidDriver.clearEditText((EditText) androidDriver.getView(id));
         final View view = androidDriver.getView(id);
@@ -134,15 +139,4 @@ public class Device {
         manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
     }
     
-    private void tryToDo(It it, String failureMessage) {
-        boolean isDone = false;
-        for (int count = 0; !isDone && count < MAX_TRIES; count++) {
-            isDone = it.shouldBeDone();
-        }
-        assertTrue(failureMessage, isDone);
-    }
-
-    private interface It {
-        boolean shouldBeDone();
-    }
 }
