@@ -29,7 +29,7 @@ public class MyFeature extends Feature {
 ```
 
 Steps are dynamically loaded from MyFeatureSteps; for example, the first
-Given() line invokes the `I\_am\_on\_the\_HelloRoboGherk\_activity` method.
+Given() line invokes the I\_am\_on\_the\_HelloRoboGherk\_activity() method.
 
 Building
 --------
