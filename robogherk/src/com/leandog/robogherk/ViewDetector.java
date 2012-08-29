@@ -15,17 +15,21 @@ public class ViewDetector {
 
 	public View find(String regex) {
 		for (View view : androidDriver.getCurrentViews()) {
-			if (viewMatchesPattern(regex, view))
+			if (viewHasTextMatchingPattern(regex, view))
 				return view;
 		}
 		return null;
 	}
 
-	private boolean viewMatchesPattern(String regex, View view) {
+	private boolean viewHasTextMatchingPattern(String regex, View view) {
 		if (view instanceof TextView) {
 			String viewText = ((TextView) view).getText().toString();
-			return viewText.matches(regex);
+    	    return stripHtmlFrom(viewText).matches(regex);
 		}
 		return false;
 	}
+
+    private String stripHtmlFrom(String viewText) {
+        return viewText.replaceAll("^<.*?>", "").replaceAll("<.*?>$" , "");
+    }
 }
