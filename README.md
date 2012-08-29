@@ -29,11 +29,31 @@ public class MyFeature extends Feature {
 ```
 
 Steps are dynamically loaded from MyFeatureSteps; for example, the first
-Given() line invokes the `I_am_on_the_HelloRoboGherk_activity` method.
+Given() line invokes the `I\_am\_on\_the\_HelloRoboGherk\_activity` method.
 
 Building
 --------
 
 * Run 'ant build' from a clone of the git repository.
 
+Development
+-----------
 
+We did incremental development using an existing app. We didn't write unit
+tests for everything, but all new features should be test-driven.
+
+The exercises are acceptance tests on RoboGherk that run against the included
+example app. 
+
+Note on Patches/Pull Requests
+-----------------------------
+* Fork the project.
+* Test-drive your feature addition or bug fix. If you need help with 
+  unit-testing Android, start a conversation by email. We'll help. 
+* Send us a pull request. Bonus points for topic branches.
+
+Who are we?
+-----------
+
+We're the maddogs @ leandog.com. Making the world a better place for mobile
+development. :)
