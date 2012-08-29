@@ -134,10 +134,6 @@ public class Device {
         androidDriver.setActivityOrientation(Solo.LANDSCAPE);
     }
 
-    public void updateEditTextField(int editTextId, String text) {
-        typeIntoField(editTextId, text);
-    }
-    
     public String getTextFromTextView(int textViewId) {
        View view = androidDriver.getView(textViewId);
        assertTrue("The view requested is not a TextView!",view instanceof TextView);
