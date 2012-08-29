@@ -30,6 +30,6 @@ public class ViewDetector {
 	}
 
     private String stripHtmlFrom(String viewText) {
-        return viewText.replaceAll("^<.*?>", "").replaceAll("<.*?>$" , "");
+        return viewText.replaceAll("<.*?>", "");
     }
 }

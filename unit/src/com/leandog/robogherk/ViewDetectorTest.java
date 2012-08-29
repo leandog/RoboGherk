@@ -44,7 +44,13 @@ public class ViewDetectorTest {
 		views.add(mock(ImageView.class));
 		viewFinder.find(".*"); 
 	}
-
+	
+	@Test
+	public void ignoresHTMLTags() {
+	    givenATextViewWithText("<p>The big dog is <strong>really</strong> big</p>");
+		assertFindsAViewLike("The big dog is really big");
+	}
+	
 	private void assertFindsAViewLike(String regex) {
 		View view = viewFinder.find(regex);
 		final String failureMessage = "Nope. Ccould not find view like "+ regex;
@@ -55,12 +61,6 @@ public class ViewDetectorTest {
 		View view = viewFinder.find(regex);
 		final String failureMessage = "Uh oh! Found a view like "+ regex;
 		assertNull(failureMessage, view);
-	}
-	
-	@Test
-	public void ignoresHTMLTags() {
-	    givenATextViewWithText("<p>The big dog is big</p>");
-		assertFindsAViewLike("The big dog is big");
 	}
 	
 	private void givenATextViewWithText(String text) {
