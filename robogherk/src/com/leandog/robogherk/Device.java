@@ -108,7 +108,7 @@ public class Device {
     }
 
     public void assertTextIsVisible(final String... oneOrMoreTexts) {
-        for (String text : oneOrMoreTexts){
+        for (String text : oneOrMoreTexts) {
             androidDriver.searchText(text);
         }
     }
