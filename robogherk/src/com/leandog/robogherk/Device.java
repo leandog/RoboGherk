@@ -112,18 +112,6 @@ public class Device {
         assertNotNull("unable to find view! ", androidDriver.getView(id));
     }
 
-    public void tryToDo(It it, String failureMessage) {
-        boolean isDone = false;
-        for (int count = 0; !isDone && count < MAX_TRIES; count++) {
-            isDone = it.shouldBeDone();
-        }
-        assertTrue(failureMessage, isDone);
-    }
-
-    interface It {
-        boolean shouldBeDone();
-    }
-
     public void clickOnViewWithId(int id) {
         View view = androidDriver.getView(id);
         assertNotNull("view not found!", view);
@@ -144,5 +132,17 @@ public class Device {
     public void unlockScreen() {
         KeyguardManager manager = (KeyguardManager) androidDriver.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
         manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
+    }
+    
+    private void tryToDo(It it, String failureMessage) {
+        boolean isDone = false;
+        for (int count = 0; !isDone && count < MAX_TRIES; count++) {
+            isDone = it.shouldBeDone();
+        }
+        assertTrue(failureMessage, isDone);
+    }
+
+    private interface It {
+        boolean shouldBeDone();
     }
 }
