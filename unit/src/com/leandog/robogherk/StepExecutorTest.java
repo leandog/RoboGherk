@@ -28,7 +28,7 @@ public class StepExecutorTest {
     }
 
     @Test
-    public void itProvidesTestDependenciesToTheSteps() throws RoboGherkException {
+    public void it_provides_test_dependencies_to_the_steps() throws RoboGherkException {
         stepExecutor.setUp(instrumentation, solo);
         stepExecutor.call("I do the first thing");
 
@@ -36,26 +36,26 @@ public class StepExecutorTest {
     }
 
     @Test
-    public void itExecutesTheStepForAFeature() throws Throwable {
+    public void it_executes_the_step_for_a_feature() throws Throwable {
         stepExecutor.call("I do the first thing");
 
         verify(stepStub).I_do_the_first_thing();
     }
 
     @Test
-    public void itExecutesTheStepForAFeatureWithArguments() throws RoboGherkException {
+    public void it_executes_the_step_for_a_feature_with_arguments() throws RoboGherkException {
         stepExecutor.call("I say 'hello - Dave' to Dave");
 
         verify(stepStub).I_say_arg_to_Dave("hello - Dave");
     }
 
     @Test(expected = NoStepsFoundException.class)
-    public void itTellsMeWhenItCannotFindAStep() throws Throwable {
+    public void it_tells_me_when_it_cannot_find_a_step() throws Throwable {
         stepExecutor.call("this does not exist");
     }
 
     @Test(expected = RoboGherkException.class)
-    public void itTellsMeWhenAnAssertionFails() throws Throwable {
+    public void it_tells_me_when_an_assertion_fails() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
 
         stepExecutor = new StepExecutor(stepStub);
@@ -63,7 +63,7 @@ public class StepExecutorTest {
     }
 
     @Test(expected = RoboGherkException.class)
-    public void itTellsMeTheCauseOfMyStepFailure() throws Throwable {
+    public void it_tells_me_the_cause_of_my_step_failure() throws Throwable {
         stepStub = new DoingThingsAndStuffSteps();
 
         stepExecutor = new StepExecutor(stepStub);
@@ -71,7 +71,7 @@ public class StepExecutorTest {
     }
     
     @Test
-    public void itCanPassThroughCallToSetUpScenario() throws Exception {
+    public void it_can_pass_through_call_to_set_up_scenario() throws Exception {
         StepDefinitions stepStub = mock(StepDefinitions.class);
        
         stepExecutor = new StepExecutor(stepStub);
@@ -81,7 +81,7 @@ public class StepExecutorTest {
     }
     
     @Test
-    public void overridingSetupScenarioIsNotRequired() throws RoboGherkException {
+    public void overriding_setup_scenario_is_not_required() throws RoboGherkException {
         StepDefinitions stepStub = new DoingThingsAndStuffSteps();
        
         stepExecutor = new StepExecutor(stepStub);

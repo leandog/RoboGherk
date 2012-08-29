@@ -15,13 +15,13 @@ public class ScenarioEnvironmentTest {
     ScenarioEnvironment scenarioEnvironment = new ScenarioEnvironment(stepExecutor, solo);
 
     @Test
-    public void finishesOpenActivitiesOnTearDown() {
+    public void finishes_open_activities_on_tear_down() {
         scenarioEnvironment.tearDown();
         verify(solo).finishOpenedActivities();
     }
     
     @Test
-    public void executingAStepIsDelegatedToTheExecutor() {
+    public void executing_a_step_is_delegated_to_the_executor() {
        scenarioEnvironment.executeStepDefinition("make members private"); 
        verify(stepExecutor).call("make members private");
     }

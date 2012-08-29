@@ -24,19 +24,19 @@ public class DeviceTest {
 	}
 	
 	@Test
-	public void clickFindsTheView() {
+	public void click_finds_the_view() {
 		device.click("hello.*world");
 		verify(viewSeeker).seek("hello.*world");
 	}
 	
 	@Test
-	public void clickClicksTheFoundView() {
+	public void click_clicks_the_found_view() {
 		device.click("someRegex");
 		verify(androidDriver).clickOnView(view);
 	}
 	
 	@Test
-	public void clickGivesUsAPrettyErrorWhenItCannotFindTheView() {
+	public void click_gives_us_a_pretty_error_when_it_cannot_find_the_view() {
 		when(viewSeeker.seek(anyString())).thenReturn(null);
 		
 		try {

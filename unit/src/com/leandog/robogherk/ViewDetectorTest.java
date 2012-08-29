@@ -28,35 +28,35 @@ public class ViewDetectorTest {
 	}
 
 	@Test
-	public void findsATextViewWhenGivenARegexWhichMatchesAnything() {
+	public void finds_a_text_view_when_given_a_regex_which_matches_anything() {
 		givenATextViewWithText("any arbitrary text");
 		assertFindsAViewLike(".*");
 	}
 	
 	@Test
-	public void findReturnsNullWhenNoViewsMatch() {
+	public void find_returns_null_when_no_views_match() {
 		givenATextViewWithText("any arbitrary text");
 		assertDoesNotFindAViewLike("flarp!");
 	}
 	
 	@Test
-	public void doesNotThrowIfAllWeHaveIsAViewThatIsNotATextView() {
+	public void does_not_throw_if_all_we_have_is_a_view_that_is_not_a_text_view() {
 		views.add(mock(ImageView.class));
 		viewFinder.find(".*"); 
 	}
 	
 	@Test
-	public void ignoresHTMLTags() {
+	public void ignores_HTML_tags() {
 	    givenATextViewWithText("<p>The big dog is <strong>really</strong> big</p>");
 		assertFindsAViewLike("The big dog is really big");
 	}
 	
 	@Test
-	public void ignoresSpacesOnTheEnds() {
+	public void ignores_spaces_on_the_ends() {
 	    givenATextViewWithText(" Admire my leading and trailing spaces! "); 
 	    assertFindsAViewLike("Admire my leading and trailing spaces!");
 	}
-	
+
 	private void assertFindsAViewLike(String regex) {
 		View view = viewFinder.find(regex);
 		final String failureMessage = "Nope. Ccould not find view like "+ regex;
