@@ -14,7 +14,6 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class Device {
 
-    private static final int MAX_TRIES = 5;
     private static final int TIME_TO_WAIT = 125000;
 
     private final Solo androidDriver;
@@ -57,25 +56,15 @@ public class Device {
     }
 
     public void waitFor(final Class<? extends Activity> activityClass) {
-        tryToDo(new TaskToTrySeveralTimes() {
-            public boolean isDone() {
-                return androidDriver.waitForActivity(activityClass.getSimpleName(), TIME_TO_WAIT);
-            }
-        }, activityClass.getSimpleName() + " did not appear. \nThe activity: " + androidDriver.getCurrentActivity()
-                .getClass().getSimpleName() + " was displayed while waiting.");
+        String failureMessage = activityClass.getSimpleName() + 
+                " did not appear. \nThe activity: " + androidDriver.getCurrentActivity()
+                .getClass().getSimpleName() + " was displayed while waiting.";
+        assertTrue(failureMessage, androidDriver.waitForActivity(activityClass.getSimpleName(), TIME_TO_WAIT));
     }
     
     public void waitForDialogToClose() {
         String failureMessage = "timed out waiting for dialog to close";
         assertTrue(failureMessage, androidDriver.waitForDialogToClose(TIME_TO_WAIT));
-    }
-
-    private void tryToDo(TaskToTrySeveralTimes task, String failureMessage) {
-        boolean isDone = false;
-        for (int count = 0; !isDone && count < MAX_TRIES; count++) {
-            isDone = task.isDone();
-        }
-        assertTrue(failureMessage, isDone);
     }
 
     public void waitFor(final String text) {
