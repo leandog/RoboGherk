@@ -4,9 +4,9 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -122,10 +122,12 @@ public class Device {
        return ((TextView)view).getText().toString(); 
     }
 
-    @SuppressWarnings("deprecation")
     public void unlockScreen() {
-        KeyguardManager manager = (KeyguardManager) androidDriver.getCurrentActivity().getSystemService(Activity.KEYGUARD_SERVICE);
-        manager.newKeyguardLock(androidDriver.getCurrentActivity().getClass().getName()).disableKeyguard();
+        androidDriver.getCurrentActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                androidDriver.getCurrentActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+            }
+        });
     }
-    
 }
