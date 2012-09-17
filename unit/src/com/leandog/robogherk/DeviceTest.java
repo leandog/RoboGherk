@@ -46,4 +46,10 @@ public class DeviceTest {
 			assertEquals("Could not find a clickable view matching 'an arbitrary regex'", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void it_can_rotate_device_to_landscape() {
+	    device.rotateToLandscape();
+	    verify(androidDriver).setActivityOrientation(Solo.LANDSCAPE);
+	}
 }
