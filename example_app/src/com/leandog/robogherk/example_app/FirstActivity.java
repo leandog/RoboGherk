@@ -1,7 +1,5 @@
 package com.leandog.robogherk.example_app;
 
-import com.leandog.robogherk.example_app.R.id;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +15,7 @@ public class FirstActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello_robo_gherk);
        
-        Button button = (Button) findViewById(id.button);
+        Button button = (Button) findViewById(R.id.button);
         
         button.setOnClickListener(new OnClickListener() {
             @Override
