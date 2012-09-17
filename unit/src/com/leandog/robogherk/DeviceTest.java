@@ -52,4 +52,10 @@ public class DeviceTest {
 	    device.rotateToLandscape();
 	    verify(androidDriver).setActivityOrientation(Solo.LANDSCAPE);
 	}
+	
+	@Test
+	public void it_can_rotate_device_to_portrait() {
+	    device.rotateToPortrait();
+	    verify(androidDriver).setActivityOrientation(Solo.PORTRAIT);
+	}
 }

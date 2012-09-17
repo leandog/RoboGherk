@@ -116,6 +116,10 @@ public class Device {
         androidDriver.setActivityOrientation(Solo.LANDSCAPE);
     }
 
+    public void rotateToPortrait() {
+        androidDriver.setActivityOrientation(Solo.PORTRAIT);
+    }
+
     public String getTextFromTextView(int textViewId) {
        View view = androidDriver.getView(textViewId);
        assertTrue("The view requested is not a TextView!",view instanceof TextView);
