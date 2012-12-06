@@ -15,5 +15,13 @@ public class MyFeature extends Feature {
         And("things that should have occured in setup have");
         And("I go to another screen");
     }
+    
+    public void test_selecting_from_a_spinner() {
+        Given("I am on the HelloRoboGherk activity");
+        When("I select 'Five' from the spinner");
+        /*
+        Then("'Five' is selected");
+        */
+    }
 
 }

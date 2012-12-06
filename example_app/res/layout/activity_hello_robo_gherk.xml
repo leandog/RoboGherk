@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,10 +12,16 @@
         android:padding="@dimen/padding_medium"
         android:text="@string/hello_world"
         tools:context=".HelloRoboGherk" />
-    
-    <Button android:id="@+id/button"
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="click me"/>
+        android:text="click me" />
 
-</RelativeLayout>
+</LinearLayout>
