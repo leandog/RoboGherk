@@ -10,6 +10,7 @@ public class MyFeatureSteps extends StepDefinitions {
 
     private boolean isTrueWhenSetupeScenarioIsCalled = false;
     private Device device;
+    private int spinnerId = com.leandog.robogherk.example_app.R.id.spinner;
 
     @Override
     public void setUpScenario() {
@@ -34,6 +35,10 @@ public class MyFeatureSteps extends StepDefinitions {
     }
 
     public void I_select_arg_from_the_spinner(String number) {
-        device.selectValueOnSpinner(com.leandog.robogherk.example_app.R.id.spinner, number);
+        device.selectValueOnSpinner(spinnerId, number);
+    }
+
+    public void arg_is_selected(String number) {
+        Assert.assertEquals(number, device.selectedValueOnSpinner(spinnerId));
     }
 }

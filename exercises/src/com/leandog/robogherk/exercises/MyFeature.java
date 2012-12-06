@@ -19,9 +19,7 @@ public class MyFeature extends Feature {
     public void test_selecting_from_a_spinner() {
         Given("I am on the HelloRoboGherk activity");
         When("I select 'Five' from the spinner");
-        /*
         Then("'Five' is selected");
-        */
     }
 
 }

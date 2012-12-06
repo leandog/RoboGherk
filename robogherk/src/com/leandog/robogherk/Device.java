@@ -156,6 +156,10 @@ public class Device {
             }
         });
     }
+    
+    public String selectedValueOnSpinner(int resourceId) {
+        return (String) ((Spinner) androidDriver.getView(resourceId)).getSelectedItem();
+    }
 
     public void unlockScreen() {
         androidDriver.getCurrentActivity().runOnUiThread(new Runnable() {
